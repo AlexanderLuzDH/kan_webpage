@@ -29,3 +29,11 @@ Images (Demos/Results)
   - `agnews_label_efficiency.png`
   - `agnews_5_labels_bar.png`
 - Open the page and click any thumbnail to view in a lightbox. If an image is missing, its tile will simply show a blank background.
+
+Serverless email (Vercel)
+- The forms POST to `/api/contact` which sends an email via Resend.
+- Configure these environment variables in Vercel → Project → Settings → Environment Variables:
+  - `RESEND_API_KEY` — your Resend API key
+  - `EMAIL_TO` — destination inbox (e.g., `contact@busleyden.com`)
+  - `FROM_EMAIL` — optional; defaults to `onboarding@resend.dev` for testing
+- After setting, redeploy (or click "Redeploy" on the latest deployment).

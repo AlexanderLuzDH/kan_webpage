@@ -44,8 +44,8 @@ function showToast(kind, title, message, timeout = 4200) {
 
 /* Forms: validation + local record */
 const EMAIL_INVALID = 'Invalid Email — Please enter a valid email address.';
-const WELCOME = 'Welcome! — We will contact you shortly.';
-const SUBMITTED = 'Submitted — Thanks! (email relay offline, recorded locally)';
+const WELCOME = 'Thank You! — We will contact you shortly.';
+const SUBMITTED = 'Thank You! — We will contact you shortly.';
 const MISSING = 'Missing Information — Please fill in all fields with valid information.';
 const THANKS = 'Thank You! — We will contact you within 24 hours.';
 
@@ -61,14 +61,14 @@ function persist(key, data){
   } catch {}
 }
 
-function sendMail(to, subject, body){
-  try {
-    const href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    const a = document.createElement('a');
-    a.href = href; a.style.display = 'none';
-    document.body.appendChild(a); a.click();
-    setTimeout(()=>a.remove(), 0);
-  } catch {}
+async function postJSON(url, payload){
+  const r = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  if (!r.ok) throw new Error('Request failed');
+  return r.json();
 }
 
 // Hero early access form
@@ -82,8 +82,12 @@ if (earlyForm) {
       return;
     }
     persist('early_access', { email });
-    showToast('ok', 'Welcome!', 'We will contact you shortly.');
-    sendMail('contact@busleyden.com', 'KAN-Infinity Early Access', `Email: ${email}\nSource: Hero form`);
+    try {
+      await postJSON('/api/contact', { source: 'hero', email });
+      showToast('ok', 'Thank You!', 'We will contact you shortly.');
+    } catch {
+      showToast('warn', 'Saved locally', 'Network issue; we will follow up.');
+    }
     (earlyForm.querySelector('input[name=email]')).value = '';
   });
 }
@@ -101,9 +105,12 @@ if (contactForm) {
       return;
     }
     persist('contact_requests', { name, email, interest });
-    showToast('ok', 'Submitted', 'Thanks! We just opened your email draft.');
-    const body = `Name: ${name}\nEmail: ${email}\nInterest: ${interest}\nSource: Contact form`;
-    sendMail('contact@busleyden.com', `KAN-Infinity Request Access — ${interest}`, body);
+    try {
+      await postJSON('/api/contact', { source: 'contact', name, email, interest });
+      showToast('ok', 'Thank You!', 'We will contact you within 24 hours.');
+    } catch {
+      showToast('warn', 'Saved locally', 'Network issue; we will follow up.');
+    }
     contactForm.reset();
   });
 }
