@@ -30,8 +30,7 @@ export default async function handler(req, res) {
       .join('\n')}</pre>`;
 
     if (!apiKey) {
-      // Accept the request but indicate server is not configured. Useful while setting up.
-      return res.status(202).json({ ok: true, queued: false, note: 'RESEND_API_KEY missing on server' });
+      return res.status(500).json({ ok: false, error: 'Missing RESEND_API_KEY on server' });
     }
 
     const r = await fetch('https://api.resend.com/emails', {
@@ -52,4 +51,3 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Server error', detail: String(err && err.message || err) });
   }
 }
-

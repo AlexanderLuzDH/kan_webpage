@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CertifiedPredictionResult",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "description": "Input ID or hash" },
+    "input": { "type": "object", "description": "Redacted input metadata" },
+    "prediction": { "type": "string" },
+    "score": { "type": "number", "minimum": 0 },
+    "threshold_tau": { "type": "number", "minimum": 0 },
+    "certified": { "type": "boolean", "description": "True if meets τ" },
+    "abstain": { "type": "boolean" },
+    "reason": { "type": "string", "description": "If abstain=true, reason code" },
+    "timestamp": { "type": "string", "format": "date-time" }
+  },
+  "required": ["id", "prediction", "threshold_tau", "certified", "abstain", "timestamp"],
+  "additionalProperties": true
+}
+

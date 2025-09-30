@@ -67,8 +67,11 @@ async function postJSON(url, payload){
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   });
-  if (!r.ok) throw new Error('Request failed');
-  return r.json();
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok || data?.ok === false) {
+    throw new Error(data?.error || 'Request failed');
+  }
+  return data;
 }
 
 // Hero early access form
