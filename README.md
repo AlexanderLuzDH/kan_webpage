@@ -31,9 +31,20 @@ Images (Demos/Results)
 - Open the page and click any thumbnail to view in a lightbox. If an image is missing, its tile will simply show a blank background.
 
 Serverless email (Vercel)
-- The forms POST to `/api/contact` which sends an email via Resend.
-- Configure these environment variables in Vercel → Project → Settings → Environment Variables:
-  - `RESEND_API_KEY` — your Resend API key
-  - `EMAIL_TO` — destination inbox (e.g., `contact@busleyden.com`)
-  - `FROM_EMAIL` — optional; defaults to `onboarding@resend.dev` for testing
-- After setting, redeploy (or click "Redeploy" on the latest deployment).
+- The forms POST to `/api/contact` which sends an email via SendGrid (preferred) or Resend (fallback).
+
+Option A — SendGrid (no DNS changes)
+- Create free SendGrid account → Settings → Sender Authentication → Single Sender → verify `FROM_EMAIL`.
+- Create API key (Mail Send Full Access).
+- Set env vars in Vercel → Project → Settings → Environment Variables:
+  - `SENDGRID_API_KEY` — your key
+  - `FROM_EMAIL` — the verified single sender (e.g., `contact@busleyden.com`)
+  - `EMAIL_TO` — where to receive submissions
+- Redeploy and test.
+
+Option B — Resend (requires domain or limited tests)
+- Set env vars:
+  - `RESEND_API_KEY`
+  - `EMAIL_TO`
+  - `FROM_EMAIL` — must be from a verified domain in Resend
+- Redeploy and test.

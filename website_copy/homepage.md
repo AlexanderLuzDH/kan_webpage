@@ -16,8 +16,8 @@ Proof points (from current artifacts)
   - 1 label/class: 89.5% acc; 5/class: 90.3%; 10/class: 91.2%
   - Predict time: ~0.36–0.40s; memory ~1.67 GB
 - AG News (10k subset, mpnet encoder):
-  - 1 label/class: 47.1%; 5/class: 70.8%; 10/class: 73.98%
-  - Predict time: 0.02–0.08s; memory ~7.2 GB
+  - 1 label/class: 47.1%; 5/class: 70.8%; 10/class: 74.0%
+  - Predict time: ~0.003–0.03s; memory ~7.3 GB
 - Coverage curves show how accuracy rises as you tighten certification: see CIFAR‑10 L=5 and L=10 curves.
 
 Visuals (use from repo)
@@ -36,4 +36,3 @@ Short FAQ preview
 - What happens to abstentions? They go to your queue with full context; you can auto‑approve common cases.
 - Does it train? No gradient training; CPU‑friendly. You can add labels anytime to increase coverage.
 - Can I self‑host? Yes, SDK and on‑prem options.
-

@@ -10,8 +10,9 @@ export default async function handler(req, res) {
     }
 
     const to = process.env.EMAIL_TO || 'contact@busleyden.com';
-    const from = process.env.FROM_EMAIL || 'onboarding@resend.dev';
-    const apiKey = process.env.RESEND_API_KEY;
+    const from = process.env.FROM_EMAIL || process.env.SEND_FROM || 'onboarding@resend.dev';
+    const resendKey = process.env.RESEND_API_KEY;
+    const sendgridKey = process.env.SENDGRID_API_KEY;
 
     const subject = name
       ? `KAN-Infinity Request — ${name}${interest ? ' (' + interest + ')' : ''}`
@@ -29,24 +30,49 @@ export default async function handler(req, res) {
       .map((l) => l.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'))
       .join('\n')}</pre>`;
 
-    if (!apiKey) {
-      return res.status(500).json({ ok: false, error: 'Missing RESEND_API_KEY on server' });
+    // Prefer SendGrid if configured (works without DNS by verifying a single sender)
+    if (sendgridKey) {
+      const r = await fetch('https://api.sendgrid.com/v3/mail/send', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${sendgridKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          personalizations: [{ to: [{ email: to }] }],
+          from: { email: from },
+          subject,
+          content: [
+            { type: 'text/plain', value: text },
+            { type: 'text/html', value: html },
+          ],
+        }),
+      });
+      if (!r.ok) {
+        const body = await r.text();
+        return res.status(502).json({ error: 'Email API failed (SendGrid)', detail: body });
+      }
+      return res.status(200).json({ ok: true, provider: 'sendgrid' });
     }
 
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ to, from, subject, text, html }),
-    });
-    if (!r.ok) {
-      const body = await r.text();
-      return res.status(502).json({ error: 'Email API failed', detail: body });
+    if (resendKey) {
+      const r = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${resendKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ to, from, subject, text, html }),
+      });
+      if (!r.ok) {
+        const body = await r.text();
+        return res.status(502).json({ error: 'Email API failed (Resend)', detail: body });
+      }
+      const data = await r.json();
+      return res.status(200).json({ ok: true, id: data.id || null, provider: 'resend' });
     }
-    const data = await r.json();
-    return res.status(200).json({ ok: true, id: data.id || null });
+
+    return res.status(500).json({ error: 'No email provider configured', detail: 'Set SENDGRID_API_KEY or RESEND_API_KEY' });
   } catch (err) {
     return res.status(500).json({ error: 'Server error', detail: String(err && err.message || err) });
   }
