@@ -1,0 +1,139 @@
+{
+    "entries":  [
+                    {
+                        "ts":  "2025-09-30T00:09:59",
+                        "context":  "fix image filenames + evidence strip",
+                        "retrieved":  true,
+                        "notes":  [
+                                      "Gallery now references existing files: cifar10_bars.png, cifar10_coverage.png, cifar10_next16_L5/L10.png, agnews_label_efficiency.png, agnews_head_to_head.png",
+                                      "Added Evidence facts row: MNIST 94% (100 labels), inpainting 85% from 15% pixels, CIFAR-10 zero-shot 89.1%",
+                                      "If images still missing, verify assets/img/ paths and filenames; 404s will show blank tiles"
+                                  ]
+                    },
+                    {
+                        "ts":  "2025-09-30T00:10:24",
+                        "context":  "fix image filenames + evidence strip",
+                        "retrieved":  true,
+                        "notes":  [
+                                      "Gallery now references existing files: cifar10_bars.png, cifar10_coverage.png, cifar10_next16_L5/L10.png, agnews_label_efficiency.png, agnews_head_to_head.png",
+                                      "Added Evidence facts row: MNIST 94% (100 labels), inpainting 85% from 15% pixels, CIFAR-10 zero-shot 89.1%",
+                                      "If images still missing, verify assets/img/ paths and filenames; 404s will show blank tiles"
+                                  ]
+                    },
+                    {
+                        "ts":  "2025-09-30T00:14:20",
+                        "context":  "spacing/layout polish for hero + overview",
+                        "retrieved":  true,
+                        "notes":  [
+                                      "Increased gaps: hero metrics row, inline form, pill rows, check-grid, facts",
+                                      "Constrained paragraph width to 75ch for readability",
+                                      "Facts cards: larger padding + radius; check-grid gap increased",
+                                      "Overall rhythm now airier without changing structure"
+                                  ]
+                    },
+                    {
+                        "ts":  "2025-09-30T00:21:54",
+                        "context":  "redact sensitive method details + remove availability blurb",
+                        "retrieved":  true,
+                        "notes":  [
+                                      "Removed availability/design-partner callout from Contact section",
+                                      "Replaced Soft-KAN/Lipschitz-minimal specifics with outcome-focused wording",
+                                      "Kept benefits (abstention, active learning) without implementation detail",
+                                      "Rationale: avoid disclosing method internals while preserving clarity for visitors"
+                                  ]
+                    },
+                    {
+                        "ts":  "2025-09-30T00:25:59",
+                        "context":  "select readability fix (dark dropdown)",
+                        "retrieved":  true,
+                        "notes":  [
+                                      "Applied color-scheme: dark at :root so native controls render dark",
+                                      "Forced dropdown option colors: .field select option { background:#0f1724; color: var(--text) }",
+                                      "Placeholder option styled muted; control background darkened for contrast"
+                                  ]
+                    },
+                    {
+                        "ts":  "2025-09-30T00:28:29",
+                        "context":  "remove Docs/Frontiers + add contact email",
+                        "retrieved":  true,
+                        "notes":  [
+                                      "Deleted Docs link and Frontiers section; cleaned nav",
+                                      "Added contact email mailto in Contact section and footer",
+                                      "Reason: user request; keeps site focused and provides direct contact channel"
+                                  ]
+                    },
+                    {
+                        "ts":  "2025-09-30T00:32:06",
+                        "context":  "branding update: BUSLEYDEN header",
+                        "retrieved":  true,
+                        "notes":  [
+                                      "Changed header brand text to BUSLEYDEN and aria-label to BUSLEYDEN home",
+                                      "Kept KAN-Infinity as product name in hero/footer (flagship product)"
+                                  ]
+                    },
+                    {
+                        "ts":  "2025-09-30T00:39:03",
+                        "context":  "overview typography redesign",
+                        "retrieved":  true,
+                        "notes":  [
+                                      "Wrapped overview paragraphs in copy-panel with glass card look",
+                                      "Added prose styles: larger lead, 1.7 line-height, improved colors",
+                                      "Added divider utility (unused yet) for future separation",
+                                      "Goal: better legibility and hierarchy without changing wording"
+                                  ]
+                    },
+                    {
+                        "ts":  "2025-09-30T00:43:40",
+                        "context":  "readability boost: larger type + spacing",
+                        "retrieved":  true,
+                        "notes":  [
+                                      "Body font increased to 17px/1.65; section padding to 96px",
+                                      "H1/H2 scale increased; lead text larger",
+                                      "Bigger gaps for metrics, pills, check list, facts; larger pill sizes",
+                                      "Callout padding/margins increased; facts cards emphasized",
+                                      "Goal: significantly more air and legibility on desktop/mobile"
+                                  ]
+                    },
+                    {
+                        "ts":  "2025-09-30T00:56:19",
+                        "context":  "marketing uplift: stats, quotes, CTA, remove design partner",
+                        "retrieved":  true,
+                        "notes":  [
+                                      "Replaced small pills with hero stat cards (4 KPIs)",
+                                      "Added quotes section for social proof",
+                                      "Added gradient CTA band with button + email link",
+                                      "Removed Design Partner option from interest select",
+                                      "Styles: .stats, .quote-grid/card, .cta-band/grid/actions"
+                                  ]
+                    },
+                    {
+                        "ts":  "2025-09-30T01:03:24",
+                        "context":  "email flow: mailto on submit + remove visible email",
+                        "retrieved":  true,
+                        "notes":  [
+                                      "Removed “Email Us” button from CTA band",
+                                      "Removed “Prefer email?” line in Contact",
+                                      "On hero and contact form submit, open mailto:contact@busleyden.com with prefilled subject/body",
+                                      "Kept localStorage logging + toasts for UX and local record"
+                                  ]
+                    },
+                    {
+                        "ts":  "2025-09-30T01:10:16",
+                        "context":  "cta position + remove Education application",
+                        "retrieved":  true,
+                        "notes":  [
+                                      "Moved CTA band to appear right after Hero and before Overview",
+                                      "Removed CTA “Request Access” button (headline + copy only)",
+                                      "Deleted Education card from Applications section as requested"
+                                  ]
+                    },
+                    {
+                        "ts":  "2025-09-30T01:12:00",
+                        "context":  "benefits layout 3x2 grid",
+                        "retrieved":  true,
+                        "notes":  [
+                                      "Changed benefits grid from four to three columns to render 6 cards as 2 rows of 3 on desktop; responsive rules remain: 2 cols \u003c=980px, 1 col \u003c=640px."
+                                  ]
+                    }
+                ]
+}
