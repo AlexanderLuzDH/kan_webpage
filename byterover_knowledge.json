@@ -150,6 +150,21 @@
                         "notes":  [
 
                                   ]
+                    },
+                    {
+                        "ts":  "2025-09-30T23:41:30",
+                        "context":  "website_copy integration",
+                        "retrieved":  true,
+                        "notes":  [
+                                      "Updated hero tagline/subtitle from homepage.md",
+                                      "Mapped key benefits to pill row",
+                                      "Added Use Cases (fraud, moderation, triage) from use_cases.md",
+                                      "Demos gallery now references website_copy/assets images directly",
+                                      "Added Pricing section from pricing.md",
+                                      "Added FAQ from faq.md",
+                                      "Added ROI calculator using website_copy/roi_calculator.js",
+                                      "Kept How It Works and existing styles; minor new CSS for FAQ/ROI"
+                                  ]
                     }
                 ]
 }

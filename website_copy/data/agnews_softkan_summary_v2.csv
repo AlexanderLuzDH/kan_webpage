@@ -1,0 +1,4 @@
+dataset,method,st_model,labels_per_class,m_labels,acc_all,tau,prep_time_sec,predict_time_sec,mem_gb,auto_tau,bias_correct,next16_label_indices
+agnews,softkan,sentence-transformers/all-mpnet-base-v2,1,4,0.5335,0.01,0.034,0.034,8.305,True,False,"[15152, 13294, 4191, 2918, 39217, 14151, 19005, 42134, 48898, 20685, 44684, 33914, 42466, 29401, 43832, 33562]"
+agnews,softkan,sentence-transformers/all-mpnet-base-v2,5,20,0.6866,0.05,0.038,0.16,7.906,True,False,"[20556, 38904, 14618, 29688, 47301, 4624, 6590, 18848, 44280, 22044, 22234, 17417, 26406, 7059, 36009, 9616]"
+agnews,softkan,sentence-transformers/all-mpnet-base-v2,10,40,0.796,0.05,0.047,0.425,7.91,True,False,"[6590, 37191, 40597, 19638, 10740, 11635, 13814, 22172, 15464, 25451, 29260, 30898, 43901, 46910, 19501, 10854]"

@@ -1,0 +1,4 @@
+dataset,method,st_model,labels_per_class,m_labels,acc_all,tau,prep_time_sec,predict_time_sec,mem_gb,auto_tau,bias_correct,next16_label_indices
+agnews,softkan,sentence-transformers/all-MiniLM-L6-v2,1,4,0.3788,0.01,0.003,0.019,2.19,True,False,"[7026, 4245, 6879, 1468, 63, 3016, 1233, 8673, 3964, 579, 7788, 5370, 8021, 8882, 1275, 8411]"
+agnews,softkan,sentence-transformers/all-MiniLM-L6-v2,5,20,0.6695,0.01,0.004,0.085,2.113,True,False,"[3323, 1675, 6177, 869, 6590, 3567, 2915, 2294, 9491, 9657, 4294, 1032, 4218, 6154, 601, 5529]"
+agnews,softkan,sentence-transformers/all-MiniLM-L6-v2,10,40,0.7228,0.05,0.004,0.046,2.115,True,False,"[6590, 2976, 8657, 5719, 8066, 3526, 1021, 1651, 3567, 7240, 9927, 4218, 6154, 8564, 5593, 2128]"

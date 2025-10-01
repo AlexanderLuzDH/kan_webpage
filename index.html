@@ -23,8 +23,10 @@
         <ul id="site-nav" class="nav-list">
           <li><a href="#overview">overview</a></li>
           <li><a href="#benefits">benefits</a></li>
+          <li><a href="#use-cases">use cases</a></li>
           <li><a href="#demos">demos</a></li>
-          <li><a href="#applications">applications</a></li>
+          <li><a href="#pricing">pricing</a></li>
+          <li><a href="#faq">faq</a></li>
           <li><a href="#how-it-works">how it works</a></li>
           <li><a href="#contact">contact</a></li>
         </ul>
@@ -37,7 +39,8 @@
         <div class="container hero-grid">
           <div class="hero-copy">
             <h1 id="hero-title">KAN-Infinity</h1>
-            <p class="tagline">Be first to try KAN-Infinity for research and production.</p>
+            <p class="tagline">Only pay for certified predictions. Everything else safely abstains.</p>
+            <p class="muted">Pick your guarantee (95% or 99%). We deliver coverage at that bar — abstentions are free and routed to review.</p>
             <ul class="stats" aria-label="Highlights">
               <li class="stat"><strong>89.1% CIFAR-10</strong><span>zero-shot from class prompts</span></li>
               <li class="stat"><strong>94% MNIST</strong><span>with only 100 labels</span></li>
@@ -77,10 +80,11 @@
             <p class="muted">From a small set of known examples or class prompts, we compute a stable solution that generalizes across the space, with a calibrated confidence signal for abstention when inputs are unfamiliar.</p>
           </div>
           <div class="pill-row">
-            <span class="pill">Training‑free — No gradient descent. No epochs. No tuning.</span>
-            <span class="pill">Explainable — Solutions come with smoothness and reliability bounds.</span>
-            <span class="pill">Efficient — Runs in seconds on a laptop CPU.</span>
-            <span class="pill">Data‑efficient — High accuracy with very few labels.</span>
+            <span class="pill">No gradient training — CPU‑friendly</span>
+            <span class="pill">Millisecond decision step on CPU</span>
+            <span class="pill">Guaranteed confidence via one threshold</span>
+            <span class="pill">Built‑in safety — abstain when unsure</span>
+            <span class="pill">Simple pricing — pay only for certified outputs</span>
           </div>
           <h3 class="subtle">A Single Law. Many Tasks.</h3>
           <ul class="check-grid">
@@ -131,6 +135,30 @@
         </div>
       </section>
 
+      <!-- Use Cases -->
+      <section id="use-cases" class="section" aria-labelledby="use-title">
+        <div class="container">
+          <h2 id="use-title">Three high‑value wedges</h2>
+          <div class="cards three">
+            <article class="card">
+              <h3>Fraud Detection in Payments</h3>
+              <p>Set a 95% target. We charge only when decisions meet that bar; otherwise we abstain and route to review.</p>
+              <p class="muted">Value: fewer manual reviews and disputes; pay only for trustable outputs.</p>
+            </article>
+            <article class="card">
+              <h3>Content Moderation</h3>
+              <p>Confident labels are charged; low‑confidence items abstain to Trust &amp; Safety with audit trail and coverage dashboards.</p>
+              <p class="muted">Value: meet policy thresholds with auditability; stop paying for guesses.</p>
+            </article>
+            <article class="card">
+              <h3>Medical Triage</h3>
+              <p>Doctors set 99%. Routine cases are certified and automated; ambiguous cases abstain and escalate.</p>
+              <p class="muted">Value: faster answers, reduced clinician load; pay only for certified outputs.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <!-- Quotes / Proof -->
       <section class="section" aria-labelledby="proof-title">
         <div class="container">
@@ -155,40 +183,40 @@
           <p class="lead">Zero/few‑shot results, coverage curves, and sample tiles.</p>
           <div class="gallery">
             <figure>
-              <a href="assets/img/cifar10_bars.png" data-caption="CIFAR‑10: Zero/Few‑shot (training‑free). Zero‑shot ~89.1%.">
-                <img src="assets/img/cifar10_bars.png" alt="CIFAR‑10 zero/few‑shot bars" />
+              <a href="website_copy/assets/cifar10_fewshot_bars.png" data-caption="CIFAR‑10: zero/few‑shot bars">
+                <img src="website_copy/assets/cifar10_fewshot_bars.png" alt="CIFAR‑10 zero/few‑shot bars" />
               </a>
               <figcaption>CIFAR‑10 — Zero/Few‑shot bars</figcaption>
             </figure>
             <figure>
-              <a href="assets/img/cifar10_coverage.png" data-caption="Coverage curve (L5/L10): accuracy vs coverage">
-                <img src="assets/img/cifar10_coverage.png" alt="Accuracy vs coverage curve L5/L10" />
+              <a href="website_copy/assets/cifar10_coverage.png" data-caption="CIFAR‑10 coverage vs certified accuracy (L5/L10)">
+                <img src="website_copy/assets/cifar10_coverage.png" alt="CIFAR‑10 coverage vs certified accuracy" />
               </a>
-              <figcaption>Accuracy vs Coverage (L5 / L10)</figcaption>
+              <figcaption>CIFAR‑10 — Coverage vs Accuracy</figcaption>
             </figure>
             <figure>
-              <a href="assets/img/cifar10_next16_L5.png" data-caption="Next‑16 tile (L5)">
-                <img src="assets/img/cifar10_next16_L5.png" alt="Next‑16 tile L5" />
+              <a href="website_copy/assets/cifar10_reliability.png" data-caption="CIFAR‑10 reliability diagram">
+                <img src="website_copy/assets/cifar10_reliability.png" alt="CIFAR‑10 reliability diagram" />
               </a>
-              <figcaption>Next‑16 tile — L5</figcaption>
+              <figcaption>CIFAR‑10 — Reliability</figcaption>
             </figure>
             <figure>
-              <a href="assets/img/cifar10_next16_L10.png" data-caption="Next‑16 tile (L10)">
-                <img src="assets/img/cifar10_next16_L10.png" alt="Next‑16 tile L10" />
-              </a>
-              <figcaption>Next‑16 tile — L10</figcaption>
-            </figure>
-            <figure>
-              <a href="assets/img/agnews_label_efficiency.png" data-caption="AG News: label‑efficiency (training‑free)">
-                <img src="assets/img/agnews_label_efficiency.png" alt="AG News label‑efficiency line chart" />
+              <a href="website_copy/assets/agnews_label_efficiency.png" data-caption="AG News label‑efficiency (training‑free)">
+                <img src="website_copy/assets/agnews_label_efficiency.png" alt="AG News label‑efficiency line chart" />
               </a>
               <figcaption>AG News — Label‑efficiency</figcaption>
             </figure>
             <figure>
-              <a href="assets/img/agnews_head_to_head.png" data-caption="AG News: head‑to‑head comparison">
-                <img src="assets/img/agnews_head_to_head.png" alt="AG News head‑to‑head bar chart" />
+              <a href="website_copy/assets/agnews_head_to_head.png" data-caption="AG News head‑to‑head (Soft‑KAN vs AMLE)">
+                <img src="website_copy/assets/agnews_head_to_head.png" alt="AG News head‑to‑head" />
               </a>
               <figcaption>AG News — Head‑to‑head</figcaption>
+            </figure>
+            <figure>
+              <a href="website_copy/assets/agnews_coverage.png" data-caption="AG News coverage vs accuracy (mpnet)">
+                <img src="website_copy/assets/agnews_coverage.png" alt="AG News coverage vs accuracy" />
+              </a>
+              <figcaption>AG News — Coverage vs Accuracy</figcaption>
             </figure>
           </div>
           <p class="muted small">Tip: click images to zoom. Place PNGs under <code>assets/img/</code> using the filenames above.</p>
@@ -263,6 +291,69 @@
         </div>
       </section>
 
+      <!-- Pricing -->
+      <section id="pricing" class="section" aria-labelledby="pricing-title">
+        <div class="container">
+          <h2 id="pricing-title">Pricing — pay only for certified outputs</h2>
+          <div class="cards three">
+            <article class="card">
+              <h3>Starter</h3>
+              <p>$0.0008 per certified decision; up to 5M certified/month; shared cloud.</p>
+            </article>
+            <article class="card">
+              <h3>Growth</h3>
+              <p>$0.0005 per certified decision; up to 50M certified/month; VPC deploy.</p>
+            </article>
+            <article class="card">
+              <h3>Enterprise</h3>
+              <p>Custom per certified decision; on‑prem / air‑gapped; SLA and audit pack.</p>
+            </article>
+          </div>
+          <ul class="check-grid" style="margin-top:1.2rem">
+            <li>Certified decision = charged event (meets your target)</li>
+            <li>Abstentions = free, routed to review</li>
+            <li>Choose your guarantee (e.g., 95% or 99%)</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="section tint" aria-labelledby="faq-title">
+        <div class="container">
+          <h2 id="faq-title">FAQ — certified predictions and abstention</h2>
+          <div class="cards two">
+            <article class="card"><h3>Is abstention a weakness?</h3><p>No. It is a safety valve and cost shield. You only pay for certified predictions; abstentions route to your queue with full context.</p></article>
+            <article class="card"><h3>How do you compute a certified prediction?</h3><p>We compute a confidence bound relative to a threshold. If the bound meets your target, we certify; otherwise we abstain.</p></article>
+            <article class="card"><h3>What happens under distribution shift?</h3><p>Coverage drops first (more abstentions). Accuracy on certified outputs remains high. You can alert & switch into conservative mode.</p></article>
+            <article class="card"><h3>Do you train on my data?</h3><p>No gradient training by default. You can add labels anytime to increase coverage; the system updates without backprop.</p></article>
+            <article class="card"><h3>How do I deploy?</h3><p>Cloud API, VPC, or on‑prem SDK — same certification semantics and audit trail.</p></article>
+            <article class="card"><h3>What’s the ROI?</h3><p>Use the calculator below to estimate savings with abstentions versus legacy review rates.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ROI Calculator -->
+      <section id="roi" class="section" aria-labelledby="roi-title">
+        <div class="container">
+          <h2 id="roi-title">Cost & Coverage Calculator</h2>
+          <form id="roi-form" class="contact-form" onsubmit="return false;">
+            <div class="form-row">
+              <div class="field"><label>Total decisions/month</label><input type="number" id="roi-volume" value="1000000" min="1" /></div>
+              <div class="field"><label>Legacy review rate (%)</label><input type="number" id="roi-legacy" value="35" min="0" max="100" /></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label>Our coverage (%)</label><input type="number" id="roi-coverage" value="72" min="0" max="100" /></div>
+              <div class="field"><label>Cost per review ($)</label><input type="number" step="0.01" id="roi-review" value="2.50" min="0" /></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label>Price per certified ($)</label><input type="number" step="0.0001" id="roi-price" value="0.0005" min="0" /></div>
+              <div class="actions" style="align-self:end"><button id="roi-run" class="btn primary">Calculate</button></div>
+            </div>
+          </form>
+          <div id="roi-out" class="cards three" style="margin-top:1rem"></div>
+        </div>
+      </section>
+
       
 
       
@@ -321,6 +412,7 @@
     <!-- Toasts -->
     <div id="toasts" class="toasts" aria-live="polite" aria-atomic="true"></div>
 
+    <script src="website_copy/roi_calculator.js"></script>
     <script src="assets/main.js?v=3" defer></script>
   </body>
   </html>

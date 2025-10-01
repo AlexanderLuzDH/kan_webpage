@@ -1,0 +1,5 @@
+dataset,method,labels_per_class,m_labels,acc_all,acc_train,acc_test,tau,prep_time_sec,predict_time_sec,mem_gb,text_prototypes,zero_shot_only,next16_label_indices_in_train
+cifar10,softkan,0,70,0.8951,1.0,0.895,0.05,0.001,0.01,1.851,True,True,[]
+cifar10,softkan,1,80,0.8939,0.8934,0.895,0.01,0.01,0.357,1.667,True,False,[]
+cifar10,softkan,5,120,0.9006,0.8998,0.9025,0.05,0.012,0.404,1.669,True,False,[]
+cifar10,softkan,10,170,0.9123,0.9124,0.912,0.05,0.011,0.37,1.673,True,False,[]

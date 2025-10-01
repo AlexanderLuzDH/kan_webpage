@@ -152,3 +152,31 @@ if (gallery) {
     }
   });
 }
+
+/* ROI Calculator */
+function fmtUSD(n){
+  try { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(n); } catch { return `$${n}` }
+}
+const roiForm = document.getElementById('roi-form');
+if (roiForm && typeof roiEstimate === 'function'){
+  const out = document.getElementById('roi-out');
+  const run = () => {
+    const volume = Number(document.getElementById('roi-volume').value||0);
+    const legacyReviewRate = Number(document.getElementById('roi-legacy').value||0)/100;
+    const ourCoverage = Number(document.getElementById('roi-coverage').value||0)/100;
+    const costPerReview = Number(document.getElementById('roi-review').value||0);
+    const pricePerCertified = Number(document.getElementById('roi-price').value||0);
+    const r = roiEstimate({ volume, legacyReviewRate, ourCoverage, costPerReview, pricePerCertified});
+    if (out){
+      out.innerHTML = `
+        <article class="card"><h3>Certified/month</h3><p>${r.certified.toLocaleString()}</p></article>
+        <article class="card"><h3>Abstentions/month</h3><p>${r.abstain.toLocaleString()}</p></article>
+        <article class="card"><h3>Spend</h3><p>${fmtUSD(r.monthlySpend)}</p></article>
+        <article class="card"><h3>Review Cost</h3><p>${fmtUSD(r.monthlyReviewCost)}</p></article>
+        <article class="card"><h3>Estimated Savings</h3><p><strong>${fmtUSD(r.monthlySavings)}</strong></p></article>
+        <article class="card"><h3>Note</h3><p>${r.notes}</p></article>`;
+    }
+  };
+  document.getElementById('roi-run')?.addEventListener('click', run);
+  run();
+}
