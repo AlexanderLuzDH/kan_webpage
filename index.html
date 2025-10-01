@@ -3,8 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>KAN-Infinity - The universal law of learning</title>
-    <meta name="description" content="KAN-Infinity is a universal extension law for learning - training-free, certifiable, and energy-efficient." />
+    <title>Busleyden — KAN‑Infinity: Certified AI predictions</title>
+    <meta name="description" content="Only pay for certified predictions. Pick 95%/99% accuracy targets; abstentions are free and routed to review. Training‑free, CPU‑friendly, and certifiable." />
+    <meta property="og:title" content="Busleyden — KAN‑Infinity: Certified AI predictions" />
+    <meta property="og:description" content="Only pay for certified predictions. 95%/99% guarantees with abstention. Training‑free, CPU‑friendly, and certifiable." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Busleyden AI" />
+    <link rel="canonical" href="https://www.busleyden.com/" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -25,6 +30,8 @@
           <li><a href="#benefits">benefits</a></li>
           <li><a href="#use-cases">use cases</a></li>
           <li><a href="#demos">demos</a></li>
+          <li><a href="#tech">tech note</a></li>
+          <li><a href="#trust">trust</a></li>
           <li><a href="#pricing">pricing</a></li>
           <li><a href="#faq">faq</a></li>
           <li><a href="#how-it-works">how it works</a></li>
@@ -61,6 +68,36 @@
         </div>
       </section>
 
+      <!-- Tech Note / Reproducibility -->
+      <section id="tech" class="section" aria-labelledby="tech-title">
+        <div class="container">
+          <h2 id="tech-title">Tech Note & Reproducibility</h2>
+          <p class="lead">CSV artifacts, charts, and a minimal evaluation recipe for CIFAR‑10 and AG News to support apples‑to‑apples benchmarking.</p>
+          <ul class="check-grid" style="margin-top:.8rem">
+            <li>CIFAR‑10 zero‑shot with CLIP text prototypes; CPU wall‑time and memory reported</li>
+            <li>Few‑shot Soft‑KAN on CIFAR‑10 (1/5/10 per class)</li>
+            <li>AG News label‑efficiency and encoder trade‑offs (mpnet vs MiniLM)</li>
+            <li>Coverage vs certified accuracy curves with L=5 and L=10</li>
+          </ul>
+          <div class="cards three" style="margin-top:1rem">
+            <article class="card"><h3>CSV Artifacts</h3><p><a href="/website_copy/data/cifar10_softkan_summary_v2.csv">CIFAR‑10 summary</a> · <a href="/website_copy/data/agnews_softkan_summary_v2.csv">AG News summary</a> · <a href="/website_copy/data/cifar10_coverage_L5.csv">CIFAR L5</a> · <a href="/website_copy/data/cifar10_coverage_L10.csv">CIFAR L10</a></p></article>
+            <article class="card"><h3>Methods Note</h3><p><a href="#contact">Request the tech note (PDF)</a>. Includes baselines, hardware, and ablations.</p></article>
+            <article class="card"><h3>Code</h3><p><a href="https://github.com/AlexanderLuzDH/kan_webpage" target="_blank" rel="noopener">Repository link</a> (site + artifacts). Eval repo coming soon.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trust / Compliance -->
+      <section id="trust" class="section tint" aria-labelledby="trust-title">
+        <div class="container">
+          <h2 id="trust-title">Trust & Compliance</h2>
+          <div class="cards three">
+            <article class="card"><h3>Privacy</h3><p>Data is processed with opt‑in redaction and audit trails. See our <a href="privacy.html">Privacy Policy</a>.</p></article>
+            <article class="card"><h3>Security</h3><p>VPC/on‑prem options; least‑privilege processing; optional isolation. See <a href="security.html">Security</a>.</p></article>
+            <article class="card"><h3>Terms</h3><p>Service definitions for certified decisions, abstentions, and SLAs. See <a href="terms.html">Terms</a>.</p></article>
+          </div>
+        </div>
+      </section>
       <!-- CTA Band -->
       <section class="cta-band" aria-labelledby="cta-title">
         <div class="container cta-grid">
@@ -154,6 +191,7 @@
               <h3>Medical Triage</h3>
               <p>Doctors set 99%. Routine cases are certified and automated; ambiguous cases abstain and escalate.</p>
               <p class="muted">Value: faster answers, reduced clinician load; pay only for certified outputs.</p>
+              <p class="muted small">Disclaimer: decision‑support only; not medical advice. See Trust.</p>
             </article>
           </div>
         </div>
@@ -219,7 +257,7 @@
               <figcaption>AG News — Coverage vs Accuracy</figcaption>
             </figure>
           </div>
-          <p class="muted small">Tip: click images to zoom. Place PNGs under <code>assets/img/</code> using the filenames above.</p>
+          <p class="muted small">Click charts to zoom. CSVs available in <code>/website_copy/data</code>.</p>
         </div>
       </section>
 
