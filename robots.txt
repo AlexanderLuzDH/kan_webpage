@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /blank
+Disallow: /blank-*
+
+Sitemap: https://www.busleyden.com/sitemap.xml
+

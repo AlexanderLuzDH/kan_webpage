@@ -9,6 +9,10 @@
     }
   ],
   "redirects": [
-    { "source": "/blank-3", "destination": "/#contact", "permanent": true }
+    { "source": "/blank-3", "destination": "/#contact", "permanent": true },
+    { "source": "/blank-:slug", "destination": "/", "permanent": true },
+    { "source": "/blank/:path*", "destination": "/", "permanent": true },
+    { "source": "/contato", "destination": "/#contact", "permanent": true },
+    { "source": "/contacto", "destination": "/#contact", "permanent": true }
   ]
 }
