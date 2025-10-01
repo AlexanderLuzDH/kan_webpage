@@ -77,7 +77,7 @@ async function postJSON(url, payload){
 // Hero early access form
 const earlyForm = document.getElementById('early-access-form');
 if (earlyForm) {
-  earlyForm.addEventListener('submit', (e) => {
+  earlyForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = /** @type {HTMLInputElement|null} */ (earlyForm.querySelector('input[name=email]'))?.value || '';
     if (!isValidEmail(email)) {
@@ -98,7 +98,7 @@ if (earlyForm) {
 // Contact form
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const name = /** @type {HTMLInputElement|null} */ (contactForm.querySelector('#name'))?.value || '';
     const email = /** @type {HTMLInputElement|null} */ (contactForm.querySelector('#email'))?.value || '';
