@@ -45,7 +45,7 @@
       <section class="section hero" aria-labelledby="hero-title">
         <div class="container hero-grid">
           <div class="hero-copy">
-            <h1 id="hero-title">KAN-Infinity</h1>
+            <h1 id="hero-title">Guaranteed AI Gate</h1>
             <p class="tagline">Only pay for certified predictions. Everything else safely abstains.</p>
             <p class="muted">Pick your guarantee (95% or 99%). We deliver coverage at that bar — abstentions are free and routed to review.</p>
             <ul class="stats" aria-label="Highlights">
@@ -103,11 +103,16 @@
       <!-- Trust / Compliance -->
       <section id="trust" class="section tint" aria-labelledby="trust-title">
         <div class="container">
-          <h2 id="trust-title">Trust & Compliance</h2>
-          <div class="cards three">
-            <article class="card"><h3>Privacy</h3><p>Data is processed with opt‑in redaction and audit trails. See our <a href="privacy.html">Privacy Policy</a>.</p></article>
-            <article class="card"><h3>Security</h3><p>VPC/on‑prem options; least‑privilege processing; optional isolation. See <a href="security.html">Security</a>.</p></article>
-            <article class="card"><h3>Terms</h3><p>Service definitions for certified decisions, abstentions, and SLAs. See <a href="terms.html">Terms</a>.</p></article>
+          <h2 id="trust-title">Trust & Guarantees</h2>
+          <p class="lead">Accepted-subset error ≤ alpha with confidence ≥ 1-delta (one-sided Clopper–Pearson). We expose presets so you can pick your risk and confidence.</p>
+          <div class="cards three" style="margin-top:1rem">
+            <article class="card"><h3>Definitions</h3><p>alpha: risk budget. delta: confidence (1-delta). Acceptance fraction: share of inputs certified. tau_acc: internal acceptance threshold.</p></article>
+            <article class="card"><h3>How we certify</h3><p><strong>RCPS</strong> calibrates acceptance so accepted-subset error ≤ alpha with probability ≥ 1-delta. <strong>MFA</strong> accepts early when confident and escalates otherwise.</p></article>
+            <article class="card"><h3>Presets</h3><p>Strict (alpha=1%, delta=5%), Balanced (alpha=5%, delta=5%), Fast (alpha=10%, delta=5%).</p></article>
+          </div>
+          <div class="cards two" style="margin-top:1rem">
+            <article class="card"><h3>Privacy & Security</h3><p>Opt-in redaction, audit trails, VPC/on-prem options. See <a href="privacy.html">Privacy</a> and <a href="security.html">Security</a>.</p></article>
+            <article class="card"><h3>Terms</h3><p>Billing semantics for certified decisions, abstentions, and SLAs. See <a href="terms.html">Terms</a>.</p></article>
           </div>
         </div>
       </section>
@@ -134,7 +139,7 @@
             <span class="pill">Millisecond decision step on CPU</span>
             <span class="pill">Guaranteed confidence via one threshold</span>
             <span class="pill">Built‑in safety — abstain when unsure</span>
-            <span class="pill">Simple pricing — pay only for certified outputs</span>
+            <span class="pill">Simple Pricing - pay only for certified outputs</span>
           </div>
           <h3 class="subtle">A Single Law. Many Tasks.</h3>
           <ul class="check-grid">
@@ -345,7 +350,7 @@
       <!-- Pricing -->
       <section id="pricing" class="section" aria-labelledby="pricing-title">
         <div class="container">
-          <h2 id="pricing-title">Pricing — pay only for certified outputs</h2>
+          <h2 id="pricing-title">Pricing - pay only for certified outputs</h2>
           <div class="cards three">
             <article class="card">
               <h3>Starter</h3>
@@ -467,3 +472,4 @@
     <script src="assets/main.js?v=3" defer></script>
   </body>
   </html>
+
