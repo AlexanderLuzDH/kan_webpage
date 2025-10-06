@@ -30,7 +30,7 @@
           <li><a href="#benefits">benefits</a></li>
           <li><a href="#use-cases">use cases</a></li>
           <li><a href="#demos">demos</a></li>
-          <li><a href="#tech">tech note</a></li>
+          <li><a href="#tech">docs</a></li>
           <li><a href="#trust">trust</a></li>
           <li><a href="#pricing">pricing</a></li>
           <li><a href="#faq">faq</a></li>
@@ -67,6 +67,18 @@
           </div>
         </div>
       </section>
+      <!-- Guarantees (RCPS/MFA) -->
+      <section id="guarantee" class="section tint" aria-labelledby="guarantee-title">
+        <div class="container">
+          <h2 id="guarantee-title">Guarantees</h2>
+          <p class="lead">Accepted-subset error ≤ alpha with confidence ≥ 1-delta (one-sided Clopper–Pearson). We expose presets so you can pick your risk and confidence.</p>
+          <div class="cards three" style="margin-top:1rem">
+            <article class="card"><h3>Definitions</h3><p>alpha: risk budget. delta: confidence (1-delta). Acceptance fraction: share of inputs certified. tau_acc: internal acceptance threshold.</p></article>
+            <article class="card"><h3>How we certify</h3><p><strong>RCPS</strong> calibrates acceptance so accepted-subset error ≤ alpha with probability ≥ 1-delta. <strong>MFA</strong> accepts early when confident and escalates otherwise.</p></article>
+            <article class="card"><h3>Presets</h3><p>Strict (alpha=1%, delta=5%), Balanced (alpha=5%, delta=5%), Fast (alpha=10%, delta=5%).</p></article>
+          </div>
+        </div>
+      </section>
 
       <!-- Tech Note / Reproducibility -->
       <section id="tech" class="section" aria-labelledby="tech-title">
@@ -84,6 +96,7 @@
             <article class="card"><h3>Methods Note</h3><p><a href="#contact">Request the tech note (PDF)</a>. Includes baselines, hardware, and ablations.</p></article>
             <article class="card"><h3>Code</h3><p><a href="https://github.com/AlexanderLuzDH/kan_webpage" target="_blank" rel="noopener">Repository link</a> (site + artifacts). Eval repo coming soon.</p></article>
           </div>
+          <div class="callout" style="margin-top:1rem"><strong>Try it (CLI)</strong>: <code>python vc_bundle_2025-10-06/code/kan_infty_speedrun_v2.py --task agnews --method softkan --subset 10000 --labels-per-class 5 --auto-tau --rcps-enable --rcps-alpha 0.05 --rcps-delta 0.05</code></div>
         </div>
       </section>
 

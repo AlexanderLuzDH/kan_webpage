@@ -166,6 +166,8 @@ if (roiForm && typeof roiEstimate === 'function'){
     const ourCoverage = Number(document.getElementById('roi-coverage').value||0)/100;
     const costPerReview = Number(document.getElementById('roi-review').value||0);
     const pricePerCertified = Number(document.getElementById('roi-price').value||0);
+    const alpha = Number(document.getElementById('roi-alpha')?.value||5)/100;
+    const conf = Number(document.getElementById('roi-conf')?.value||95)/100;
     const r = roiEstimate({ volume, legacyReviewRate, ourCoverage, costPerReview, pricePerCertified});
     if (out){
       out.innerHTML = `
@@ -174,7 +176,7 @@ if (roiForm && typeof roiEstimate === 'function'){
         <article class="card"><h3>Spend</h3><p>${fmtUSD(r.monthlySpend)}</p></article>
         <article class="card"><h3>Review Cost</h3><p>${fmtUSD(r.monthlyReviewCost)}</p></article>
         <article class="card"><h3>Estimated Savings</h3><p><strong>${fmtUSD(r.monthlySavings)}</strong></p></article>
-        <article class="card"><h3>Note</h3><p>${r.notes}</p></article>`;
+        <article class="card"><h3>Target</h3><p>Accepted-subset error ≤ ${(alpha*100).toFixed(1)}% with confidence ≥ ${(conf*100).toFixed(1)}%.</p></article>`;
     }
   };
   document.getElementById('roi-run')?.addEventListener('click', run);
