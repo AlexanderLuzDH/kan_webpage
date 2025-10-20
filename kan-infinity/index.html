@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Busleyden — KAN‑Infinity: Certified AI predictions</title>
+    <meta name="description" content="Only pay for certified predictions. Pick 95%/99% accuracy targets; abstentions are free and routed to review. Training‑free, CPU‑friendly, and certifiable." />
+    <meta property="og:title" content="Busleyden — KAN‑Infinity: Certified AI predictions" />
+    <meta property="og:description" content="Only pay for certified predictions. 95%/99% guarantees with abstention. Training‑free, CPU‑friendly, and certifiable." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Busleyden AI" />
+    <link rel="canonical" href="https://www.busleyden.com/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300E1FF'/%3E%3Cstop offset='1' stop-color='%23945CFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='96' height='96' rx='20' fill='%2310151F'/%3E%3Cpath d='M20 68L44 28h8l24 40h-9L48 40 29 68z' fill='url(%23g)'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <div class="noise"></div>
+    <header class="site-header" id="top">
+      <a href="#top" class="brand" aria-label="BUSLEYDEN home">
+        <svg width="28" height="28" viewBox="0 0 96 96" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00E1FF"/><stop offset="1" stop-color="#945CFF"/></linearGradient></defs><rect width="96" height="96" rx="20" fill="#10151F"/><path d="M20 68L44 28h8l24 40h-9L48 40 29 68z" fill="url(#lg)"/></svg>
+        <span>BUSLEYDEN</span>
+      </a>
+      <nav>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <ul id="site-nav" class="nav-list">
+          <li><a href="#overview">overview</a></li>
+          <li><a href="#benefits">benefits</a></li>
+          <li><a href="#use-cases">use cases</a></li>
+          <li><a href="#demos">demos</a></li>
+          <li><a href="#tech">docs</a></li>
+          <li><a href="#trust">trust</a></li>
+          <li><a href="#pricing">pricing</a></li>
+          <li><a href="#faq">faq</a></li>
+          <li><a href="#how-it-works">how it works</a></li>
+          <li><a href="#contact">contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="section hero" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <h1 id="hero-title">Guaranteed AI Gate</h1>
+            <p class="tagline">Only pay for certified predictions. Everything else safely abstains.</p>
+            <p class="muted">Pick your guarantee (95% or 99%). We deliver coverage at that bar — abstentions are free and routed to review.</p>
+            <ul class="stats" aria-label="Highlights">
+              <li class="stat"><strong>89.1% CIFAR-10</strong><span>zero-shot from class prompts</span></li>
+              <li class="stat"><strong>94% MNIST</strong><span>with only 100 labels</span></li>
+              <li class="stat"><strong>100–1000× lower energy</strong><span>vs. deep training</span></li>
+              <li class="stat"><strong>Seconds on CPU</strong><span>no training, no fine‑tuning</span></li>
+            </ul>
+            <form class="inline-form" id="early-access-form" novalidate>
+              <label class="sr-only" for="hero-email">Enter your email</label>
+              <input id="hero-email" name="email" type="email" placeholder="Enter your email" autocomplete="email" required />
+              <button type="submit" class="btn primary">Join Early Access</button>
+            </form>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orb orb-a"></div>
+            <div class="orb orb-b"></div>
+            <div class="grid3d"></div>
+          </div>
+        </div>
+      </section>
+      <!-- Guarantees (RCPS/MFA) -->
+      <section id="guarantee" class="section tint" aria-labelledby="guarantee-title">
+        <div class="container">
+          <h2 id="guarantee-title">Guarantees</h2>
+          <p class="lead">Accepted-subset error ≤ alpha with confidence ≥ 1-delta (one-sided Clopper–Pearson). We expose presets so you can pick your risk and confidence.</p>
+          <div class="cards three" style="margin-top:1rem">
+            <article class="card"><h3>Definitions</h3><p>alpha: risk budget. delta: confidence (1-delta). Acceptance fraction: share of inputs certified. tau_acc: internal acceptance threshold.</p></article>
+            <article class="card"><h3>How we certify</h3><p><strong>RCPS</strong> calibrates acceptance so accepted-subset error ≤ alpha with probability ≥ 1-delta. <strong>MFA</strong> accepts early when confident and escalates otherwise.</p></article>
+            <article class="card"><h3>Presets</h3><p>Strict (alpha=1%, delta=5%), Balanced (alpha=5%, delta=5%), Fast (alpha=10%, delta=5%).</p></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tech Note / Reproducibility -->
+      <section id="tech" class="section" aria-labelledby="tech-title">
+        <div class="container">
+          <h2 id="tech-title">Tech Note & Reproducibility</h2>
+          <p class="lead">CSV artifacts, charts, and a minimal evaluation recipe for CIFAR‑10 and AG News to support apples‑to‑apples benchmarking.</p>
+          <ul class="check-grid" style="margin-top:.8rem">
+            <li>CIFAR‑10 zero‑shot with CLIP text prototypes; CPU wall‑time and memory reported</li>
+            <li>Few‑shot Soft‑KAN on CIFAR‑10 (1/5/10 per class)</li>
+            <li>AG News label‑efficiency and encoder trade‑offs (mpnet vs MiniLM)</li>
+            <li>Coverage vs certified accuracy curves with L=5 and L=10</li>
+          </ul>
+          <div class="cards three" style="margin-top:1rem">
+            <article class="card"><h3>CSV Artifacts</h3><p><a href="/website_copy/data/cifar10_softkan_summary_v2.csv">CIFAR‑10 summary</a> · <a href="/website_copy/data/agnews_softkan_summary_v2.csv">AG News summary</a> · <a href="/website_copy/data/cifar10_coverage_L5.csv">CIFAR L5</a> · <a href="/website_copy/data/cifar10_coverage_L10.csv">CIFAR L10</a></p></article>
+            <article class="card"><h3>Methods Note</h3><p><a href="#contact">Request the tech note (PDF)</a>. Includes baselines, hardware, and ablations.</p></article>
+            <article class="card"><h3>Code</h3><p><a href="https://github.com/AlexanderLuzDH/kan_webpage" target="_blank" rel="noopener">Repository link</a> (site + artifacts). Eval repo coming soon.</p></article>
+          </div>
+          <div class="callout" style="margin-top:1rem"><strong>Try it (CLI)</strong>: <code>python vc_bundle_2025-10-06/code/kan_infty_speedrun_v2.py --task agnews --method softkan --subset 10000 --labels-per-class 5 --auto-tau --rcps-enable --rcps-alpha 0.05 --rcps-delta 0.05</code></div>
+        </div>
+      </section>
+
+      <!-- Trust / Compliance -->
+      <section id="trust" class="section tint" aria-labelledby="trust-title">
+        <div class="container">
+          <h2 id="trust-title">Trust & Guarantees</h2>
+          <p class="lead">Accepted-subset error ≤ alpha with confidence ≥ 1-delta (one-sided Clopper–Pearson). We expose presets so you can pick your risk and confidence.</p>
+          <div class="cards three" style="margin-top:1rem">
+            <article class="card"><h3>Definitions</h3><p>alpha: risk budget. delta: confidence (1-delta). Acceptance fraction: share of inputs certified. tau_acc: internal acceptance threshold.</p></article>
+            <article class="card"><h3>How we certify</h3><p><strong>RCPS</strong> calibrates acceptance so accepted-subset error ≤ alpha with probability ≥ 1-delta. <strong>MFA</strong> accepts early when confident and escalates otherwise.</p></article>
+            <article class="card"><h3>Presets</h3><p>Strict (alpha=1%, delta=5%), Balanced (alpha=5%, delta=5%), Fast (alpha=10%, delta=5%).</p></article>
+          </div>
+          <div class="cards two" style="margin-top:1rem">
+            <article class="card"><h3>Privacy & Security</h3><p>Opt-in redaction, audit trails, VPC/on-prem options. See <a href="privacy.html">Privacy</a> and <a href="security.html">Security</a>.</p></article>
+            <article class="card"><h3>Terms</h3><p>Billing semantics for certified decisions, abstentions, and SLAs. See <a href="terms.html">Terms</a>.</p></article>
+          </div>
+        </div>
+      </section>
+      <!-- CTA Band -->
+      <section class="cta-band" aria-labelledby="cta-title">
+        <div class="container cta-grid">
+          <div>
+            <h2 id="cta-title">Ship accurate models without training</h2>
+            <p class="muted">Cut energy and time‑to‑value. Certify decisions with abstention when inputs are unfamiliar.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Overview -->
+      <section id="overview" class="section" aria-labelledby="overview-title">
+        <div class="container">
+          <h2 id="overview-title">What is KAN-Infinity?</h2>
+          <div class="copy-panel prose">
+            <p class="lead">KAN-Infinity is a universal extension law for learning. Given known examples, it fills in the unknowns by solving a simple, stable equation - no training, no fragile optimization, and no black-box guesswork. The result is unique, certifiable, and explainable.</p>
+            <p class="muted">From a small set of known examples or class prompts, we compute a stable solution that generalizes across the space, with a calibrated confidence signal for abstention when inputs are unfamiliar.</p>
+          </div>
+          <div class="pill-row">
+            <span class="pill">No gradient training — CPU‑friendly</span>
+            <span class="pill">Millisecond decision step on CPU</span>
+            <span class="pill">Guaranteed confidence via one threshold</span>
+            <span class="pill">Built‑in safety — abstain when unsure</span>
+            <span class="pill">Simple Pricing - pay only for certified outputs</span>
+          </div>
+          <h3 class="subtle">A Single Law. Many Tasks.</h3>
+          <ul class="check-grid">
+            <li>Classification with minimal labels</li>
+            <li>Image restoration and inpainting</li>
+            <li>Regression with smoothness certificates</li>
+            <li>Control, interpolation, and reasoning</li>
+          </ul>
+          <div class="facts" aria-label="Evidence">
+            <div class="fact"><strong>94% MNIST</strong><span>with only 100 labels</span></div>
+            <div class="fact"><strong>85% inpainting</strong><span>reconstructed from 15% pixels</span></div>
+            <div class="fact"><strong>89.1% CIFAR‑10</strong><span>zero‑shot from class prompts</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Benefits -->
+      <section id="benefits" class="section tint" aria-labelledby="benefits-title">
+        <div class="container">
+          <h2 id="benefits-title">Why KAN‑Infinity</h2>
+          <p class="lead">Accuracy from less data, fast on commodity hardware, greener by design, and transparent by default.</p>
+          <div class="cards three">
+            <article class="card">
+              <h3>Accuracy</h3>
+              <p>94% MNIST with 100 labels; edge‑preserving inpainting.</p>
+            </article>
+            <article class="card">
+              <h3>Speed</h3>
+              <p>No training. Solutions via averaging or closed‑form.</p>
+            </article>
+            <article class="card">
+              <h3>Efficiency</h3>
+              <p>100–1000× lower energy use vs. deep training.</p>
+            </article>
+            <article class="card">
+              <h3>Transparency</h3>
+              <p>Certificates of smoothness and reliability.</p>
+            </article>
+            <article class="card">
+              <h3>Abstention</h3>
+              <p>Use distance-to-boundary to abstain on out-of-distribution inputs and route to review.</p>
+            </article>
+            <article class="card">
+              <h3>Active Learning</h3>
+              <p>Suggests top-N next labels that most reduce worst-case error.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Use Cases -->
+      <section id="use-cases" class="section" aria-labelledby="use-title">
+        <div class="container">
+          <h2 id="use-title">Three high‑value wedges</h2>
+          <div class="cards three">
+            <article class="card">
+              <h3>Fraud Detection in Payments</h3>
+              <p>Set a 95% target. We charge only when decisions meet that bar; otherwise we abstain and route to review.</p>
+              <p class="muted">Value: fewer manual reviews and disputes; pay only for trustable outputs.</p>
+            </article>
+            <article class="card">
+              <h3>Content Moderation</h3>
+              <p>Confident labels are charged; low‑confidence items abstain to Trust &amp; Safety with audit trail and coverage dashboards.</p>
+              <p class="muted">Value: meet policy thresholds with auditability; stop paying for guesses.</p>
+            </article>
+            <article class="card">
+              <h3>Medical Triage</h3>
+              <p>Doctors set 99%. Routine cases are certified and automated; ambiguous cases abstain and escalate.</p>
+              <p class="muted">Value: faster answers, reduced clinician load; pay only for certified outputs.</p>
+              <p class="muted small">Disclaimer: decision‑support only; not medical advice. See Trust.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quotes / Proof -->
+      <section class="section" aria-labelledby="proof-title">
+        <div class="container">
+          <h2 id="proof-title">Why Teams Care</h2>
+          <div class="quote-grid">
+            <figure class="quote-card">
+              <blockquote>“Zero-shot is no longer a party trick. Start from prompts, add a few examples, and you’re production‑ready — without training.”</blockquote>
+              <figcaption>— Collaborating Scientist</figcaption>
+            </figure>
+            <figure class="quote-card">
+              <blockquote>“Governance teams finally get a confidence knob: abstain when unsure, act when certain. It’s certified caution, not a heuristic.”</blockquote>
+              <figcaption>— Industry Advisor</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- Demos -->
+      <section id="demos" class="section" aria-labelledby="demos-title">
+        <div class="container">
+          <h2 id="demos-title">Demos</h2>
+          <p class="lead">Zero/few‑shot results, coverage curves, and sample tiles.</p>
+          <div class="gallery">
+            <figure>
+              <a href="website_copy/assets/cifar10_fewshot_bars.png" data-caption="CIFAR‑10: zero/few‑shot bars">
+                <img src="website_copy/assets/cifar10_fewshot_bars.png" alt="CIFAR‑10 zero/few‑shot bars" />
+              </a>
+              <figcaption>CIFAR‑10 — Zero/Few‑shot bars</figcaption>
+            </figure>
+            <figure>
+              <a href="website_copy/assets/cifar10_coverage.png" data-caption="CIFAR‑10 coverage vs certified accuracy (L5/L10)">
+                <img src="website_copy/assets/cifar10_coverage.png" alt="CIFAR‑10 coverage vs certified accuracy" />
+              </a>
+              <figcaption>CIFAR‑10 — Coverage vs Accuracy</figcaption>
+            </figure>
+            <figure>
+              <a href="website_copy/assets/cifar10_reliability.png" data-caption="CIFAR‑10 reliability diagram">
+                <img src="website_copy/assets/cifar10_reliability.png" alt="CIFAR‑10 reliability diagram" />
+              </a>
+              <figcaption>CIFAR‑10 — Reliability</figcaption>
+            </figure>
+            <figure>
+              <a href="website_copy/assets/agnews_label_efficiency.png" data-caption="AG News label‑efficiency (training‑free)">
+                <img src="website_copy/assets/agnews_label_efficiency.png" alt="AG News label‑efficiency line chart" />
+              </a>
+              <figcaption>AG News — Label‑efficiency</figcaption>
+            </figure>
+            <figure>
+              <a href="website_copy/assets/agnews_head_to_head.png" data-caption="AG News head‑to‑head (Soft‑KAN vs AMLE)">
+                <img src="website_copy/assets/agnews_head_to_head.png" alt="AG News head‑to‑head" />
+              </a>
+              <figcaption>AG News — Head‑to‑head</figcaption>
+            </figure>
+            <figure>
+              <a href="website_copy/assets/agnews_coverage.png" data-caption="AG News coverage vs accuracy (mpnet)">
+                <img src="website_copy/assets/agnews_coverage.png" alt="AG News coverage vs accuracy" />
+              </a>
+              <figcaption>AG News — Coverage vs Accuracy</figcaption>
+            </figure>
+          </div>
+          <p class="muted small">Click charts to zoom. CSVs available in <code>/website_copy/data</code>.</p>
+        </div>
+      </section>
+
+      <!-- Applications -->
+      <section id="applications" class="section" aria-labelledby="apps-title">
+        <div class="container">
+          <h2 id="apps-title">Applications</h2>
+          <div class="cards three">
+            <article class="card">
+              <h3>Product &amp; Content Moderation</h3>
+              <p>Launch a new category from class names; abstain when unsure.</p>
+            </article>
+            <article class="card">
+              <h3>Retail &amp; Catalog Intelligence</h3>
+              <p>Cold-start recognition for new SKUs without annotation.</p>
+            </article>
+            <article class="card">
+              <h3>Security &amp; Compliance</h3>
+              <p>Threshold confidence to filter out-of-distribution inputs and escalate to humans.</p>
+            </article>
+            <article class="card">
+              <h3>RAG / Tool Routing</h3>
+              <p>Training-free router from text-only labels (e.g., use OCR, search docs, summarize) with certificates.</p>
+            </article>
+            <article class="card">
+              <h3>Healthcare</h3>
+              <p>Predict outcomes from minimal data with reliability bounds.</p>
+            </article>
+            <article class="card">
+              <h3>Climate &amp; Energy</h3>
+              <p>Fill satellite gaps and optimize grids with extreme efficiency.</p>
+            </article>
+            <article class="card">
+              <h3>Robotics &amp; Safety</h3>
+              <p>Learn safe behaviors quickly with certified robustness.</p>
+            </article>
+            <article class="card">
+              <h3>Finance</h3>
+              <p>Forecast and score risk with fewer assumptions and tighter bounds.</p>
+            </article>
+            <article class="card">
+              <h3>Public Services</h3>
+              <p>Transparent, accountable AI for policy and operations.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works -->
+      <section id="how-it-works" class="section tint" aria-labelledby="how-title">
+        <div class="container">
+          <h2 id="how-title">How It Works</h2>
+          <p class="lead">From boundary knowledge to universal extension - simple, stable, and certifiable.</p>
+          <ol class="steps">
+            <li>
+              <h3>1) Pose the Boundary</h3>
+              <p>Encode known examples as boundary conditions on a graph/geometry.</p>
+            </li>
+            <li>
+              <h3>2) Solve the Law</h3>
+              <p>Compute the minimal-complexity extension - often via averaging or closed form.</p>
+            </li>
+            <li>
+              <h3>3) Get Certificates</h3>
+              <p>Obtain smoothness and reliability bounds for transparent decisions.</p>
+            </li>
+          </ol>
+          <div class="callout"><strong>In practice:</strong> We derive a simple, stable solution from boundary examples and provide a usable confidence signal to support abstention and human review.</div>
+        </div>
+      </section>
+
+      <!-- Pricing -->
+      <section id="pricing" class="section" aria-labelledby="pricing-title">
+        <div class="container">
+          <h2 id="pricing-title">Pricing - pay only for certified outputs</h2>
+          <div class="cards three">
+            <article class="card">
+              <h3>Starter</h3>
+              <p>$0.0008 per certified decision; up to 5M certified/month; shared cloud.</p>
+            </article>
+            <article class="card">
+              <h3>Growth</h3>
+              <p>$0.0005 per certified decision; up to 50M certified/month; VPC deploy.</p>
+            </article>
+            <article class="card">
+              <h3>Enterprise</h3>
+              <p>Custom per certified decision; on‑prem / air‑gapped; SLA and audit pack.</p>
+            </article>
+          </div>
+          <ul class="check-grid" style="margin-top:1.2rem">
+            <li>Certified decision = charged event (meets your target)</li>
+            <li>Abstentions = free, routed to review</li>
+            <li>Choose your guarantee (e.g., 95% or 99%)</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="section tint" aria-labelledby="faq-title">
+        <div class="container">
+          <h2 id="faq-title">FAQ — certified predictions and abstention</h2>
+          <div class="cards two">
+            <article class="card"><h3>Is abstention a weakness?</h3><p>No. It is a safety valve and cost shield. You only pay for certified predictions; abstentions route to your queue with full context.</p></article>
+            <article class="card"><h3>How do you compute a certified prediction?</h3><p>We compute a confidence bound relative to a threshold. If the bound meets your target, we certify; otherwise we abstain.</p></article>
+            <article class="card"><h3>What happens under distribution shift?</h3><p>Coverage drops first (more abstentions). Accuracy on certified outputs remains high. You can alert & switch into conservative mode.</p></article>
+            <article class="card"><h3>Do you train on my data?</h3><p>No gradient training by default. You can add labels anytime to increase coverage; the system updates without backprop.</p></article>
+            <article class="card"><h3>How do I deploy?</h3><p>Cloud API, VPC, or on‑prem SDK — same certification semantics and audit trail.</p></article>
+            <article class="card"><h3>What’s the ROI?</h3><p>Use the calculator below to estimate savings with abstentions versus legacy review rates.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ROI Calculator -->
+      <section id="roi" class="section" aria-labelledby="roi-title">
+        <div class="container">
+          <h2 id="roi-title">Cost & Coverage Calculator</h2>
+          <form id="roi-form" class="contact-form" onsubmit="return false;">
+            <div class="form-row">
+              <div class="field"><label>Total decisions/month</label><input type="number" id="roi-volume" value="1000000" min="1" /></div>
+              <div class="field"><label>Legacy review rate (%)</label><input type="number" id="roi-legacy" value="35" min="0" max="100" /></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label>Our coverage (%)</label><input type="number" id="roi-coverage" value="72" min="0" max="100" /></div>
+              <div class="field"><label>Cost per review ($)</label><input type="number" step="0.01" id="roi-review" value="2.50" min="0" /></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label>Price per certified ($)</label><input type="number" step="0.0001" id="roi-price" value="0.0005" min="0" /></div>
+              <div class="actions" style="align-self:end"><button id="roi-run" class="btn primary">Calculate</button></div>
+            </div>
+          </form>
+          <div id="roi-out" class="cards three" style="margin-top:1rem"></div>
+        </div>
+      </section>
+
+      
+
+      
+
+      <!-- Contact -->
+      <section id="contact" class="section tint" aria-labelledby="contact-title">
+        <div class="container">
+          <h2 id="contact-title">Get Involved</h2>
+          <p class="lead">Join the early access, request a demo, or explore research collaboration.</p>
+          
+          <form id="contact-form" class="contact-form" novalidate>
+            <div class="form-row">
+              <div class="field">
+                <label for="name">Your name</label>
+                <input id="name" name="name" type="text" placeholder="Enter your name" autocomplete="name" required />
+              </div>
+              <div class="field">
+                <label for="email">Your email</label>
+                <input id="email" name="email" type="email" placeholder="Enter your email" autocomplete="email" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="interest">Select your interest</label>
+                <select id="interest" name="interest" required>
+                  <option value="" selected>Choose one</option>
+                  <option>Media / Press</option>
+                  <option>Healthcare</option>
+                  <option>Climate &amp; Energy</option>
+                  <option>Robotics &amp; Safety</option>
+                  <option>Finance</option>
+                  <option>Education &amp; Public Services</option>
+                  <option>LLM / ARC-AGI Research</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="actions">
+              <button type="submit" class="btn primary">Request Access</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container foot-grid">
+        <div class="brand-inline">
+          <svg width="24" height="24" viewBox="0 0 96 96" aria-hidden="true"><defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00E1FF"/><stop offset="1" stop-color="#945CFF"/></linearGradient></defs><rect width="96" height="96" rx="20" fill="#10151F"/><path d="M20 68L44 28h8l24 40h-9L48 40 29 68z" fill="url(#lg2)"/></svg>
+          <strong>KAN-Infinity</strong>
+        </div>
+        <small>© 2025 KAN-Infinity. The universal law of learning - training-free, certifiable, and energy-efficient. • Contact: <a href="mailto:contact@busleyden.com">contact@busleyden.com</a></small>
+      </div>
+    </footer>
+
+    <!-- Toasts -->
+    <div id="toasts" class="toasts" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="website_copy/roi_calculator.js"></script>
+    <script src="assets/main.js?v=3" defer></script>
+  </body>
+  </html>
+
