@@ -232,8 +232,11 @@
             <p class="muted">Start your free 30-day trial. See your risk in real-time. No credit card required.</p>
           </div>
           <div class="cta-actions">
-            <button class="btn primary" onclick="document.getElementById('trial-form').scrollIntoView({behavior:'smooth'})">Start Trial</button>
-            <a href="mailto:contact@busleyden.com" class="btn" style="background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:var(--text); text-decoration:none">Contact Sales</a>
+            <form class="inline-form" id="cta-form" novalidate>
+              <label class="sr-only" for="cta-email">Enter your email</label>
+              <input id="cta-email" name="email" type="email" placeholder="Enter your email" autocomplete="email" required />
+              <button type="submit" class="btn primary">Start 30-Day Trial</button>
+            </form>
           </div>
         </div>
       </section>
@@ -276,6 +279,40 @@
         .then(data => {
           if (data.ok !== false) {
             document.getElementById('cft-email').value = '';
+            alert('Thank you! We\'ll be in touch shortly to set up your 30-day trial.');
+          } else {
+            alert('Error: ' + (data.error || 'Please try again.'));
+          }
+          btn.disabled = false;
+          btn.textContent = 'Start 30-Day Trial';
+        });
+      });
+
+      document.getElementById('cta-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cta-email').value;
+        if (!email) {
+          alert('Please enter a valid email address.');
+          return;
+        }
+        const btn = event.target.querySelector('button');
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            source: 'cft_trial',
+            email: email,
+            name: 'CFT Trial Signup'
+          })
+        })
+        .then(r => r.json())
+        .catch(() => ({}))
+        .then(data => {
+          if (data.ok !== false) {
+            document.getElementById('cta-email').value = '';
             alert('Thank you! We\'ll be in touch shortly to set up your 30-day trial.');
           } else {
             alert('Error: ' + (data.error || 'Please try again.'));
