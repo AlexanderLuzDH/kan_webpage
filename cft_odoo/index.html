@@ -254,7 +254,35 @@
       document.getElementById('trial-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const email = document.getElementById('cft-email').value;
-        alert('Thank you! Send us your details at contact@busleyden.com to complete signup.');
+        if (!email) {
+          alert('Please enter a valid email address.');
+          return;
+        }
+        const btn = event.target.querySelector('button');
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            source: 'cft_trial',
+            email: email,
+            name: 'CFT Trial Signup'
+          })
+        })
+        .then(r => r.json())
+        .catch(() => ({}))
+        .then(data => {
+          if (data.ok !== false) {
+            document.getElementById('cft-email').value = '';
+            alert('Thank you! We\'ll be in touch shortly to set up your 30-day trial.');
+          } else {
+            alert('Error: ' + (data.error || 'Please try again.'));
+          }
+          btn.disabled = false;
+          btn.textContent = 'Start 30-Day Trial';
+        });
       });
     </script>
   </body>
