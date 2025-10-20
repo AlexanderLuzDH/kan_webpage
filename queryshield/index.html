@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QueryShield — Database Query Performance Analysis</title>
+    <meta name="description" content="Automated database query performance analysis for Django and FastAPI. Detect N+1 queries, missing indexes, and performance issues before production." />
+    <meta property="og:title" content="QueryShield — Database Query Performance Analysis" />
+    <meta property="og:description" content="Automated N+1 detection, missing index analysis, and AI-powered performance suggestions. Free and open source." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="QueryShield" />
+    <link rel="canonical" href="https://www.busleyden.com/queryshield/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300E1FF'/%3E%3Cstop offset='1' stop-color='%23945CFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='96' height='96' rx='20' fill='%2310151F'/%3E%3Cpath d='M24 72L48 24h8l32 48h-10l-16-24-16 24z' fill='url(%23g)'/%3E%3C/svg%3E" />
+    <style>
+:root{
+  --bg:#0b0f16;
+  --bg-soft:#0e1420;
+  --panel:#121a26;
+  --text:#e6ebf3;
+  --muted:#9fb0c7;
+  --brand-a:#00e1ff;
+  --brand-b:#945cff;
+  --ok:#49e58b;
+  --warn:#ffb84d;
+  --err:#ff6b6b;
+  --ring: color-mix(in oklab, var(--brand-a), var(--brand-b));
+  --shadow: 0 8px 24px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.35);
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font: 17px/1.65 Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color:var(--text); background:radial-gradient(1200px 800px at 10% -10%, rgba(148,92,255,.12), transparent), radial-gradient(1000px 700px at 110% 10%, rgba(0,225,255,.10), transparent), var(--bg);
+}
+
+.noise{position:fixed; inset:0; pointer-events:none; background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22 stitchTiles=%22stitch%22/></filter><rect width=%22400%22 height=%22400%22 filter=%22url(%23n)%22 opacity=%220.035%22/></svg>'); opacity:.9; mix-blend-mode:soft-light;}
+
+.container{width:min(1100px, 92%); margin-inline:auto}
+
+.site-header{position:sticky; top:0; z-index:20; backdrop-filter:saturate(1.2) blur(8px); background:linear-gradient(180deg, rgba(11,15,22,.85), rgba(11,15,22,.55) 60%, transparent); border-bottom:1px solid rgba(255,255,255,.07)}
+.site-header .brand{display:flex; align-items:center; gap:.6rem; padding:.8rem 1rem; color:var(--text); text-decoration:none; font-weight:700; letter-spacing:.4px}
+.site-header nav{display:flex; align-items:center; gap:1rem}
+.nav-list{display:flex; list-style:none; gap:.8rem; padding:0; margin:0 .8rem 0 0}
+.nav-list a{display:block; padding:.7rem .9rem; color:var(--muted); text-decoration:none; border-radius:8px}
+.nav-list a:hover,.nav-list a:focus{color:var(--text); background:rgba(255,255,255,.05)}
+
+.section{padding: 96px 0}
+.section.tint{background:linear-gradient(180deg, rgba(255,255,255,.03), transparent)}
+
+h1{font-size: clamp(2.4rem, 6.5vw, 4.6rem); margin:0 0 .6rem; letter-spacing:-.02em}
+h2{font-size: clamp(1.8rem, 3.8vw, 2.8rem); margin:0 0 .9rem}
+h3{font-size: 1.15rem; margin:.3rem 0 .5rem}
+.lead{color:var(--muted); font-size: clamp(1.1rem, 1.6vw, 1.25rem)}
+.muted{color:var(--muted)}
+
+/* Hero */
+.hero{padding: 96px 0 72px}
+.hero-grid{display:grid; grid-template-columns: 1.1fr .9fr; gap: 3rem; align-items:center}
+.hero-copy .tagline{font-weight:500; color:var(--muted); margin-bottom:1.2rem}
+.inline-form{display:flex; gap:1rem; margin-top:1.4rem}
+.inline-form input{flex:1; min-width:220px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:var(--text); border-radius:12px; padding:.9rem 1rem}
+.inline-form input:focus{outline: none; border-color: color-mix(in oklab, var(--brand-a), var(--brand-b)); box-shadow:0 0 0 4px rgba(0,225,255,.12)}
+.btn{appearance:none; border:none; border-radius:12px; padding:.9rem 1.1rem; font-weight:600; letter-spacing:.2px; cursor:pointer}
+.btn.primary{color:#061018; background: linear-gradient(90deg, var(--brand-a), var(--brand-b)); box-shadow: 0 6px 18px rgba(148,92,255,.25), 0 2px 8px rgba(0,225,255,.25)}
+.btn.primary:hover{filter:saturate(1.05) brightness(1.03)}
+.btn.secondary{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:var(--text)}
+.btn.secondary:hover{background:rgba(255,255,255,.08)}
+
+/* Marketing stats */
+.stats{display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:1rem; padding:0; list-style:none; margin:1.2rem 0 1rem}
+.stat{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025)); border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:.9rem 1rem; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:.25rem}
+.stat strong{font-size:1.1rem; letter-spacing:.2px}
+.stat span{color:var(--muted)}
+@media (min-width: 860px){ .stats{grid-template-columns: repeat(4, minmax(0,1fr))} }
+
+.hero-art{position:relative; min-height:320px; border-radius:18px; background:radial-gradient(600px 360px at 20% 10%, rgba(148,92,255,.24), transparent), radial-gradient(520px 320px at 90% 0%, rgba(0,225,255,.22), transparent), linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); overflow:hidden}
+.hero-bg-img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.35; filter:saturate(1.15) contrast(1.05)}
+.grid3d{position:absolute; inset:0; background-image: linear-gradient(transparent 95%, rgba(255,255,255,.06) 95%), linear-gradient(90deg, transparent 95%, rgba(255,255,255,.06) 95%); background-size: 40px 40px; transform: perspective(800px) rotateX(50deg) translateY(-10%); transform-origin: center top; opacity:.6}
+.orb{position:absolute; filter: blur(18px); border-radius:50%}
+.orb-a{width:180px; height:180px; top: -36px; right: -18px; background: radial-gradient(circle at 30% 30%, #fff, #fff0 40%), var(--brand-b)}
+.orb-b{width:220px; height:220px; bottom: -40px; left: -36px; background: radial-gradient(circle at 30% 30%, #fff, #fff0 40%), var(--brand-a)}
+
+@media (max-width: 940px){
+  .hero-grid{grid-template-columns: 1fr; gap:1.6rem}
+}
+
+.check-grid{display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:1rem; padding-left:0; list-style:none; margin-top:.9rem}
+.check-grid li{padding-left:1.8rem; position:relative}
+.check-grid li::before{content:""; position:absolute; left:.35rem; top:.45rem; width:.9rem; height:.9rem; border-radius:50%; background:conic-gradient(from 200deg, var(--brand-a), var(--brand-b)); mask: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 20 20%22><path fill=%22white%22 d=%22M8.5 13.6l6.2-6.2 1.3 1.3-7.5 7.5L3 10.7l1.3-1.3z%22/></svg>') center/contain no-repeat}
+
+.example{background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); border-radius:16px; padding:1rem 1.1rem; box-shadow:var(--shadow); margin:1rem 0}
+.example strong{font-weight:700; color:var(--brand-a)}
+
+.cards{display:grid; gap:1rem}
+.cards.two{grid-template-columns: repeat(2, minmax(0,1fr))}
+.cards.three{grid-template-columns: repeat(3, minmax(0,1fr))}
+@media (max-width: 980px){
+  .cards.three{grid-template-columns: repeat(2, minmax(0,1fr))}
+}
+@media (max-width: 640px){
+  .cards.two,.cards.three{grid-template-columns: 1fr}
+}
+
+.card{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:1.5rem; box-shadow:var(--shadow); min-height:120px}
+.card h3{font-weight:700; color:var(--text)}
+.card p{color:var(--muted); margin:0.5rem 0 0}
+
+.code-block{background:#0a0d14; color:#e6ebf3; padding:1rem; border-radius:8px; overflow-x:auto; margin:1.5rem 0; font-family: 'JetBrains Mono', monospace; font-size:0.9em; line-height:1.6; border:1px solid rgba(255,255,255,.08)}
+code{color:var(--brand-a)}
+
+.step{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-left:4px solid var(--brand-b); border-radius:14px; padding:1.1rem 1.2rem; margin:1.5rem 0; box-shadow:var(--shadow)}
+.step strong{color:var(--brand-a)}
+
+.callout{margin:1.5rem 0; background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12); border-left:4px solid var(--brand-b); border-radius:14px; padding:1.1rem 1.2rem; color:var(--text)}
+
+.cta-band{padding:72px 0; background:radial-gradient(800px 400px at 10% -20%, rgba(148,92,255,.16), transparent), radial-gradient(800px 400px at 110% -20%, rgba(0,225,255,.16), transparent)}
+.cta-grid{display:flex; align-items:center; justify-content:space-between; gap:2rem}
+.cta-actions{display:flex; gap:1rem; flex-wrap:wrap}
+@media (max-width: 720px){
+  .cta-grid{flex-direction:column; text-align:center}
+}
+
+footer{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); border-top:1px solid rgba(255,255,255,.08); padding:2rem 0; text-align:center; color:var(--muted); margin-top:96px}
+footer a{color:var(--brand-a); text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+.feature-icon{font-size:2.4rem; margin-bottom:.8rem}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    </style>
+  </head>
+  <body>
+    <div class="noise"></div>
+    
+    <header class="site-header" id="top">
+      <a href="#top" class="brand" aria-label="QueryShield home">
+        <svg width="28" height="28" viewBox="0 0 96 96" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00E1FF"/><stop offset="1" stop-color="#945CFF"/></linearGradient></defs><rect width="96" height="96" rx="20" fill="#10151F"/><path d="M24 72L48 24h8l32 48h-10l-16-24-16 24z" fill="url(#lg)"/></svg>
+        <span>QUERYSHIELD</span>
+      </a>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="#what">what</a></li>
+          <li><a href="#features">features</a></li>
+          <li><a href="#install">install</a></li>
+          <li><a href="#docs">docs</a></li>
+          <li><a href="#github">github</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="section hero" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <h1 id="hero-title">Catch Query Issues Before Production</h1>
+            <p class="tagline">Automated database performance analysis. Find N+1 queries, missing indexes, and slow patterns in seconds.</p>
+            <p class="muted">Django, FastAPI, SQLAlchemy. Free and open source. Works with PostgreSQL, MySQL, SQLite.</p>
+            <ul class="stats" aria-label="Highlights">
+              <li class="stat"><strong>N+1 Detection</strong><span>Identify inefficient loop patterns</span></li>
+              <li class="stat"><strong>Missing Indexes</strong><span>Find unindexed columns</span></li>
+              <li class="stat"><strong>Cost Analysis</strong><span>Estimate database infrastructure ROI</span></li>
+              <li class="stat"><strong>AI Suggestions</strong><span>Specific fixes with confidence scores</span></li>
+            </ul>
+            <form class="inline-form" style="margin-top:1.4rem">
+              <input type="text" placeholder="Get started: pip install queryshield" readonly style="cursor:pointer; padding:.9rem 1rem"/>
+              <button type="button" class="btn primary" onclick="navigator.clipboard.writeText('pip install queryshield')">Copy</button>
+            </form>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <img class="hero-bg-img" src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1600&auto=format&fit=crop" alt="Abstract gradient" />
+            <div class="orb orb-a"></div>
+            <div class="orb orb-b"></div>
+            <div class="grid3d"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- What It Does -->
+      <section id="what" class="section tint">
+        <div class="container">
+          <h2>What QueryShield Detects</h2>
+          <p class="lead">Automated analysis of your database queries to surface performance problems before they hit production.</p>
+          <ul class="check-grid" style="margin-top:1.8rem">
+            <li>N+1 queries (loops accessing foreign keys inefficiently)</li>
+            <li>Missing indexes on WHERE clause columns</li>
+            <li>SELECT * queries on large tables</li>
+            <li>Complex JOINs (3+ tables) without optimization hints</li>
+            <li>Sequential table scans instead of index lookups</li>
+            <li>Expensive SORT operations without indexes</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section id="features" class="section">
+        <div class="container">
+          <h2>Features</h2>
+          <div class="cards three" style="margin-top:2rem">
+            <article class="card">
+              <div class="feature-icon">🔍</div>
+              <h3>Automatic Detection</h3>
+              <p>Runs during tests. Zero config. Analyzes all queries in real-time.</p>
+            </article>
+            <article class="card">
+              <div class="feature-icon">🤖</div>
+              <h3>AI Root Cause Analysis</h3>
+              <p>Get specific explanations and fix suggestions with confidence scores.</p>
+            </article>
+            <article class="card">
+              <div class="feature-icon">💰</div>
+              <h3>Cost Estimation</h3>
+              <p>See estimated database infrastructure costs and ROI of fixes.</p>
+            </article>
+            <article class="card">
+              <div class="feature-icon">⚡</div>
+              <h3>Multi-Framework</h3>
+              <p>Works with Django, FastAPI, SQLAlchemy. Any Python web framework.</p>
+            </article>
+            <article class="card">
+              <div class="feature-icon">📊</div>
+              <h3>Production Monitoring</h3>
+              <p>Optional middleware to sample and monitor real-world queries with 1% overhead.</p>
+            </article>
+            <article class="card">
+              <div class="feature-icon">📖</div>
+              <h3>EXPLAIN Plan Analysis</h3>
+              <p>Parses database execution plans to surface expensive operations.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Installation -->
+      <section id="install" class="section tint">
+        <div class="container">
+          <h2>Quick Start</h2>
+          <p class="lead">Get running in 2 minutes.</p>
+
+          <h3 style="margin-top:2rem; color:var(--brand-a)">Step 1: Install the CLI</h3>
+          <div class="code-block">pip install queryshield</div>
+
+          <h3 style="margin-top:2rem; color:var(--brand-a)">Step 2: Choose Your Framework</h3>
+
+          <h4>Django</h4>
+          <div class="code-block">pip install queryshield-probe</div>
+          <div class="step">
+            Add to your <code>settings.py</code>:
+            <div class="code-block" style="margin-top:.8rem">INSTALLED_APPS = [
+    'queryshield_probe',
+    # ... your apps
+]</div>
+            Then run tests as normal: <code>python manage.py test</code>
+          </div>
+
+          <h4 style="margin-top:1.5rem">FastAPI/SQLAlchemy</h4>
+          <div class="code-block">pip install queryshield-sqlalchemy</div>
+          <div class="step">
+            Use in your tests:
+            <div class="code-block" style="margin-top:.8rem">from queryshield_sqlalchemy import QueryShieldProbe
+
+probe = QueryShieldProbe(session)
+# ... run your test queries ...
+report = probe.finalize()</div>
+          </div>
+
+          <h4 style="margin-top:1.5rem">Production Monitoring (Optional)</h4>
+          <div class="code-block">pip install queryshield-monitoring</div>
+          <div class="step">
+            Add middleware:
+            <div class="code-block" style="margin-top:.8rem">from queryshield_monitoring import QueryShieldMiddleware
+
+app.add_middleware(
+    QueryShieldMiddleware,
+    api_key="optional-saas-api-key",
+    sample_rate=0.01,  # 1% of queries
+    slow_query_threshold_ms=500
+)</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Example Output -->
+      <section id="docs" class="section">
+        <div class="container">
+          <h2>Sample Report</h2>
+          <p class="lead">QueryShield generates detailed JSON reports with actionable insights.</p>
+          <div class="code-block" style="margin-top:1.5rem; font-size:0.85em; overflow-y:auto; max-height:400px">{
+  "total_queries": 523,
+  "problems": [
+    {
+      "type": "N+1",
+      "sql": "SELECT * FROM books WHERE author_id = ?",
+      "count": 15,
+      "root_cause": "Loop accessing foreign key without prefetch",
+      "suggestion": "Use select_related() or prefetch_related() to batch load related objects",
+      "confidence": 95,
+      "estimated_improvement": "15x faster",
+      "estimated_monthly_cost": 150
+    },
+    {
+      "type": "MISSING_INDEX",
+      "sql": "SELECT * FROM users WHERE email = ?",
+      "root_cause": "Email column has no index",
+      "suggestion": "Add index: CREATE INDEX idx_users_email ON users(email)",
+      "confidence": 92,
+      "estimated_improvement": "100x faster",
+      "estimated_monthly_cost": 2100
+    }
+  ],
+  "estimated_monthly_cost": 3250,
+  "recommended_fixes": [
+    "Add select_related('author') to QuerySet",
+    "Create index on users(email)",
+    "Review complex JOIN in reports view"
+  ]
+}</div>
+        </div>
+      </section>
+
+      <!-- Pro Early Access -->
+      <section id="early" class="section tint">
+        <div class="container">
+          <h2>Pro Early Access</h2>
+          <p class="lead">We are building paid features for teams that need deeper visibility and automation. Leave your email if you want early access and discounts.</p>
+
+          <div class="cards two" style="margin-top:1.2rem">
+            <article class="card">
+              <h3>Planned Pro Features</h3>
+              <ul class="check-grid" style="margin-top:.6rem">
+                <li>Hosted dashboard with history and trends</li>
+                <li>Performance regression detection on PRs (GitHub Checks)</li>
+                <li>Alerting (Slack, email, webhooks, PagerDuty)</li>
+                <li>Cost analytics and ROI calculator</li>
+                <li>Team roles (RBAC) and API key management</li>
+                <li>On‑premise/self‑hosted option</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Join the Waitlist</h3>
+              <form id="qs-early-form" class="inline-form" novalidate>
+                <label for="qs-early-email" class="sr-only">Email</label>
+                <input id="qs-early-email" name="email" type="email" placeholder="Enter your email" autocomplete="email" required />
+                <button type="submit" class="btn primary">Notify Me</button>
+              </form>
+              <p class="muted" style="margin-top:.8rem">No spam. We will only email about Pro availability and discounts.</p>
+              <div id="qs-early-msg" class="muted" style="display:none; margin-top:.6rem"></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta-band">
+        <div class="container">
+          <div class="cta-grid">
+            <div>
+              <h2>Ready to optimize your database?</h2>
+              <p class="muted">Free. Open source. Works with any Python framework.</p>
+            </div>
+            <div class="cta-actions">
+              <a href="https://github.com/AlexanderLuzDH/queryshield" class="btn primary" id="github">View on GitHub</a>
+              <a href="https://pypi.org/project/queryshield/" class="btn secondary">PyPI</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 QueryShield. <a href="https://github.com/AlexanderLuzDH/queryshield">Open source</a> and free forever.</p>
+        <p><small>Built by <a href="https://busleyden.com">Busleyden AI</a></small></p>
+      </div>
+    </footer>
+  <script>
+    (function(){
+      function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v||'').trim()); }
+      async function postJSON(url, payload){
+        const r = await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+        const data = await r.json().catch(() => ({}));
+        if (!r.ok || data?.ok === false) throw new Error(data?.error || 'Request failed');
+        return data;
+      }
+      const form = document.getElementById('qs-early-form');
+      if (form){
+        const input = document.getElementById('qs-early-email');
+        const msg = document.getElementById('qs-early-msg');
+        form.addEventListener('submit', async function(e){
+          e.preventDefault();
+          const email = input?.value || '';
+          if (!isValidEmail(email)){
+            if (msg){ msg.style.display='block'; msg.style.color='#ff6b6b'; msg.textContent = 'Invalid email. Please try again.'; }
+            return;
+          }
+          try {
+            await postJSON('/api/contact', { source: 'queryshield_pro', email, interest: 'QueryShield Pro Early Access' });
+            if (msg){ msg.style.display='block'; msg.style.color='#49e58b'; msg.textContent = 'Thanks! We\'ll be in touch soon.'; }
+            if (input) input.value='';
+          } catch (err){
+            if (msg){ msg.style.display='block'; msg.style.color='#ffb84d'; msg.textContent = 'Saved locally — we\'ll follow up.'; }
+            try { const prev = JSON.parse(localStorage.getItem('qs_pro_waitlist')||'[]'); prev.push({email, ts:new Date().toISOString()}); localStorage.setItem('qs_pro_waitlist', JSON.stringify(prev)); } catch {}
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
