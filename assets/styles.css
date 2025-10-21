@@ -148,7 +148,7 @@ h3{font-size: 1.15rem; margin:.3rem 0 .5rem}
 .cta-grid{display:flex; align-items:center; justify-content:space-between; gap:1rem}
 .cta-actions{display:flex; gap:.6rem; flex-wrap:wrap}
 .cta-actions .btn{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:var(--text)}
-.cta-actions .btn.primary{color:#061018}
+.cta-actions .btn.primary{color:#fff; font-weight:700}
 
 /* FAQ tweaks */
 .cards.two{grid-template-columns: repeat(2, minmax(0,1fr))}
