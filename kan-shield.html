@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KAN Shield — Training‑Free LLM Firewall</title>
+    <meta name="description" content="KAN Shield: training‑free inference firewall for LLMs. Block PII leaks, jailbreaks, and tool misuse. Policy‑as‑code. HIPAA/GDPR/PCI packs." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <div class="noise"></div>
+    <header class="site-header" id="top">
+      <a href="/" class="brand" aria-label="BUSLEYDEN home">
+        <svg width="28" height="28" viewBox="0 0 96 96" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00E1FF"/><stop offset="1" stop-color="#945CFF"/></linearGradient></defs><rect width="96" height="96" rx="20" fill="#10151F"/><path d="M20 68L44 28h8l24 40h-9L48 40 29 68z" fill="url(#lg)"/></svg>
+        <span>BUSLEYDEN</span>
+      </a>
+    </header>
+
+    <main>
+      <section class="section hero" aria-labelledby="hero-title" style="background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(148,92,255,.18), rgba(0,0,0,0) 60%),
+        radial-gradient(900px 500px at 88% 20%, rgba(0,225,255,.14), rgba(0,0,0,0) 60%),
+        linear-gradient(180deg, rgba(16,21,31,.94) 0%, rgba(16,21,31,.76) 55%, rgba(16,21,31,.94) 100%);
+        border-radius: 16px;">
+        <div class="container hero-grid" style="grid-template-columns:1fr; text-align:center; gap:1.2rem">
+          <div class="hero-copy" style="max-width:840px; margin:0 auto">
+            <div style="letter-spacing:.22em; text-transform:uppercase; font-weight:700; color:#8FA3BF; opacity:.9; margin-bottom:.4rem">KAN Shield</div>
+            <h1 id="hero-title">Training‑Free LLM Firewall</h1>
+            <p class="tagline">Block hallucinations, PII leaks, jailbreaks, and unsafe tool calls in &lt;20ms on CPU.</p>
+            <ul class="metrics">
+              <li class="metric-pill">Policy‑as‑code</li>
+              <li class="metric-pill">HIPAA/GDPR/PCI packs</li>
+              <li class="metric-pill">SIEM export</li>
+              <li class="metric-pill">Shadow‑mode rollout</li>
+            </ul>
+            <div class="inline-form" style="justify-content:center">
+              <a class="btn primary" href="#trial">Start 14‑day Trial</a>
+              <a class="btn" href="#contact">Request Demo</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="how-title">
+        <div class="container">
+          <h2 id="how-title">How It Works</h2>
+          <div class="cards four" style="margin-top:1rem">
+            <div class="card">
+              <h3>Signal</h3>
+              <p>PII/secret/profanity detectors, jailbreak templates, entropy and repetition checks, OCR/ASR for images/audio.</p>
+            </div>
+            <div class="card">
+              <h3>Risk</h3>
+              <p>Monotone‑safe score combining PRV rules, distance, toxicity, decode depth, and prompt risk.</p>
+            </div>
+            <div class="card">
+              <h3>Action</h3>
+              <p>allow / revise / ask human / block — with templates and shadow mode for safe rollout.</p>
+            </div>
+            <div class="card">
+              <h3>Export</h3>
+              <p>Splunk, Datadog, Elasticsearch logs; webhooks for alerts. Signed, auditable decisions.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section tint" aria-labelledby="policy-title">
+        <div class="container">
+          <h2 id="policy-title">Policy‑as‑Code</h2>
+          <p class="lead">JSON/YAML rules: <em>allow_if</em>, <em>deny_if</em>, thresholds, and route‑level budgets. Compliance packs included.</p>
+          <div class="facts">
+            <div class="fact"><strong>HIPAA</strong><span>PHI patterns, route guardrails</span></div>
+            <div class="fact"><strong>GDPR</strong><span>PII detection, consent routing</span></div>
+            <div class="fact"><strong>PCI‑DSS</strong><span>PAN/CVV/track data detection</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="trial" aria-labelledby="trial-title">
+        <div class="container">
+          <h2 id="trial-title">Start Free Trial</h2>
+          <p class="muted">No credit card required. We’ll send setup instructions and a sample policy.</p>
+          <form class="contact-form" onsubmit="return submitTrial(event)">
+            <div class="form-row">
+              <div class="field">
+                <label for="email">Work Email</label>
+                <input id="email" type="email" required placeholder="you@company.com" />
+              </div>
+              <div class="field">
+                <label for="company">Company</label>
+                <input id="company" type="text" required placeholder="Company Inc." />
+              </div>
+            </div>
+            <div class="actions">
+              <button class="btn primary" type="submit">Get Trial Link</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="section tint" id="contact" aria-labelledby="contact-title">
+        <div class="container">
+          <h2 id="contact-title">Talk to Us</h2>
+          <p class="muted">Have requirements or compliance constraints? We can help tailor policies.</p>
+          <div class="copy-panel prose">
+            <p>Contact: <a href="mailto:contact@busleyden.com">contact@busleyden.com</a></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container foot-grid">
+        <div class="brand-inline">
+          <svg width="24" height="24" viewBox="0 0 96 96" aria-hidden="true"><defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00E1FF"/><stop offset="1" stop-color="#945CFF"/></linearGradient></defs><rect width="96" height="96" rx="20" fill="#10151F"/><path d="M20 68L44 28h8l24 40h-9L48 40 29 68z" fill="url(#lg2)"/></svg>
+          <strong>Busleyden</strong>
+        </div>
+        <small>© 2025 Busleyden. Radical optimization for AI and data systems. • <a href="/">Home</a></small>
+      </div>
+    </footer>
+
+    <div class="toasts" id="toasts" aria-live="polite"></div>
+    <script>
+      function toast(kind, title, msg){
+        const box=document.getElementById('toasts');
+        const el=document.createElement('div');
+        el.className='toast '+(kind||'');
+        el.innerHTML='<div><strong>'+title+'</strong><span>'+msg+'</span></div><button class="close" onclick="this.parentElement.remove()">×</button>';
+        box.appendChild(el);
+        setTimeout(()=>{try{el.remove()}catch{}}
+        ,6000);
+      }
+      function submitTrial(e){
+        e.preventDefault();
+        const email=document.getElementById('email').value.trim();
+        const company=document.getElementById('company').value.trim();
+        if(!email||!company){ toast('warn','Missing info','Please fill email and company.'); return false; }
+        try{
+          const key='kan_shield_trials';
+          const list=JSON.parse(localStorage.getItem(key)||'[]');
+          list.push({email,company,ts:Date.now()});
+          localStorage.setItem(key, JSON.stringify(list));
+          toast('ok','Request received','We\'ll email you the trial link shortly.');
+          e.target.reset();
+        }catch(err){ toast('err','Could not save','Please email contact@busleyden.com'); }
+        return false;
+      }
+    </script>
+  </body>
+</html>
+
+
