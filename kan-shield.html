@@ -315,29 +315,62 @@ result = shield.check(input, output)</pre>
     </footer>
 
     <div class="toasts" id="toasts" aria-live="polite"></div>
+    <script src="assets/main.js?v=3" defer></script>
     <script>
-      function toast(kind, title, msg){
-        const box=document.getElementById('toasts');
-        const el=document.createElement('div');
-        el.className='toast '+(kind||'');
-        el.innerHTML='<div><strong>'+title+'</strong><span>'+msg+'</span></div><button class="close" onclick="this.parentElement.remove()">×</button>';
-        box.appendChild(el);
-        setTimeout(()=>{try{el.remove()}catch{}}
-        ,6000);
+      function isValidEmail(v) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
       }
-      function submitTrial(e){
+
+      async function submitTrial(e){
         e.preventDefault();
-        const email=document.getElementById('email').value.trim();
-        const company=document.getElementById('company').value.trim();
-        if(!email||!company){ toast('warn','Missing info','Please fill email and company.'); return false; }
+        const emailInput = document.getElementById('email');
+        const companyInput = document.getElementById('company');
+        const email = emailInput.value.trim();
+        const company = companyInput.value.trim();
+        
+        if(!email || !company) { 
+          showToast('warn', 'Missing info', 'Please fill email and company.'); 
+          return false; 
+        }
+        
+        if(!isValidEmail(email)) {
+          showToast('err', 'Invalid email', 'Please enter a valid email address.');
+          return false;
+        }
+
+        // Save locally as backup
         try{
           const key='kan_shield_trials';
           const list=JSON.parse(localStorage.getItem(key)||'[]');
-          list.push({email,company,ts:Date.now()});
+          list.push({email, company, ts: new Date().toISOString()});
           localStorage.setItem(key, JSON.stringify(list));
-          toast('ok','Request received','We\'ll email you the trial link shortly.');
+        }catch{}
+
+        // Send to backend
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              source: 'kan_shield_trial', 
+              email, 
+              company,
+              interest: 'KAN Shield 14-day trial'
+            })
+          });
+          
+          const data = await response.json().catch(() => ({}));
+          
+          if (!response.ok || data?.ok === false) {
+            throw new Error(data?.error || 'Request failed');
+          }
+          
+          showToast('ok', 'Request received', 'We\'ll email you the trial link shortly.');
           e.target.reset();
-        }catch(err){ toast('err','Could not save','Please email contact@busleyden.com'); }
+        } catch(err) { 
+          showToast('warn', 'Saved locally', 'Network issue; we will follow up via email.');
+        }
+        
         return false;
       }
     </script>
