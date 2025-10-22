@@ -44,38 +44,229 @@
         </div>
       </section>
 
-      <section class="section" aria-labelledby="how-title">
+      <section class="section" aria-labelledby="features-title">
         <div class="container">
-          <h2 id="how-title">How It Works</h2>
+          <h2 id="features-title">Why Teams Choose KAN Shield</h2>
+          <p class="lead">Comprehensive LLM security without slowing down your models or requiring retraining.</p>
+          
+          <div class="stats">
+            <div class="stat"><strong>&lt;20ms</strong><span>Target latency (CPU)</span></div>
+            <div class="stat"><strong>Zero</strong><span>Training required</span></div>
+            <div class="stat"><strong>Multi-modal</strong><span>Text + Image + Audio</span></div>
+            <div class="stat"><strong>Policy-driven</strong><span>JSON/YAML config</span></div>
+          </div>
+
+          <h3 style="margin-top:2.4rem; margin-bottom:1rem">Complete Protection Layer</h3>
           <div class="cards four" style="margin-top:1rem">
             <div class="card">
-              <h3>Signal</h3>
-              <p>PII/secret/profanity detectors, jailbreak templates, entropy and repetition checks, OCR/ASR for images/audio.</p>
+              <h3>🔒 Input Defense</h3>
+              <p>Adversarial prompt detection using kNN embeddings, template matching, perplexity checks. Blocks DAN/jailbreak attempts before they reach your model.</p>
             </div>
             <div class="card">
-              <h3>Risk</h3>
-              <p>Monotone‑safe score combining PRV rules, distance, toxicity, decode depth, and prompt risk.</p>
+              <h3>🛡️ Output Safety</h3>
+              <p>PII/PHI/PCI detection (SSN, CC, MRN, API keys), toxicity classifiers, hallucination scoring. Redact or block before users see risky outputs.</p>
             </div>
             <div class="card">
-              <h3>Action</h3>
-              <p>allow / revise / ask human / block — with templates and shadow mode for safe rollout.</p>
+              <h3>🤖 Agent Rails</h3>
+              <p>Tool call validation, egress filtering, schema enforcement. Prevent agents from accessing /etc/passwd, calling blocked APIs, or exfiltrating data.</p>
             </div>
             <div class="card">
-              <h3>Export</h3>
-              <p>Splunk, Datadog, Elasticsearch logs; webhooks for alerts. Signed, auditable decisions.</p>
+              <h3>🖼️ Multi‑Modal</h3>
+              <p>OCR (Tesseract) for images, ASR (Whisper) for audio. Screen embedded PII in screenshots, invoices, voice recordings — not just text.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section tint" aria-labelledby="policy-title">
+      <section class="section tint" aria-labelledby="how-title">
         <div class="container">
-          <h2 id="policy-title">Policy‑as‑Code</h2>
-          <p class="lead">JSON/YAML rules: <em>allow_if</em>, <em>deny_if</em>, thresholds, and route‑level budgets. Compliance packs included.</p>
-          <div class="facts">
-            <div class="fact"><strong>HIPAA</strong><span>PHI patterns, route guardrails</span></div>
-            <div class="fact"><strong>GDPR</strong><span>PII detection, consent routing</span></div>
-            <div class="fact"><strong>PCI‑DSS</strong><span>PAN/CVV/track data detection</span></div>
+          <h2 id="how-title">4‑Stage Pipeline</h2>
+          <p class="muted">Every request flows through Signal → Risk → Action → Export in &lt;20ms.</p>
+          <ol class="steps" style="list-style:none; padding:0; margin-top:1.4rem">
+            <li><strong>1. Signal Capture</strong> — Fast O(1) detectors for PII, secrets, profanity, brand violations, entropy spikes, decode depth, prompt adversarial patterns.</li>
+            <li><strong>2. Risk Scoring</strong> — Monotone‑safe composite score: PRV rules + KAN distance + kNN purity + toxicity + prompt risk. Higher score = safer.</li>
+            <li><strong>3. Action Router</strong> — Policy‑driven decision: allow (pass‑through), revise (template rewrite), ask_human (escalate), block (reject with explanation). Shadow mode for safe rollout.</li>
+            <li><strong>4. Audit Export</strong> — Signed decisions sent to Splunk/Datadog/Elasticsearch. Webhook alerts for SLO breaches. Full audit trail for compliance.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="policy-title">
+        <div class="container">
+          <h2 id="policy-title">Policy‑as‑Code + Pre‑Built Compliance</h2>
+          <p class="lead">Define rules in JSON/YAML. Deploy in seconds. No retraining.</p>
+          
+          <div class="copy-panel prose" style="margin-top:1.4rem">
+            <p><strong>Example Policy (HIPAA):</strong></p>
+            <pre style="background:rgba(0,0,0,.3); padding:1rem; border-radius:8px; overflow-x:auto; font-family:'JetBrains Mono',monospace; font-size:.9rem; color:#e0e6f0">{
+  "policy_id": "hipaa_v1",
+  "deny_if": [
+    {"field": "pii_found", "contains": "ssn"},
+    {"field": "pii_found", "contains": "medical_record_number"}
+  ],
+  "routes": {
+    "/health/records": {"alpha": 0.01, "action": "ask_human"}
+  },
+  "siem": {"type": "splunk", "endpoint": "https://hec.splunk.com"}
+}</pre>
+          </div>
+
+          <h3 style="margin-top:2rem">Included Compliance Packs</h3>
+          <div class="cards three" style="margin-top:1rem">
+            <div class="card">
+              <h3>HIPAA</h3>
+              <p>PHI patterns (MRN, diagnosis codes, medications, DOB+name), route‑level risk budgets, audit trails, encrypted at rest.</p>
+            </div>
+            <div class="card">
+              <h3>GDPR</h3>
+              <p>PII detection (email, phone, address), consent‑aware routing, data minimization, right‑to‑be‑forgotten hooks.</p>
+            </div>
+            <div class="card">
+              <h3>PCI‑DSS</h3>
+              <p>PAN/CVV/expiry detection, tokenization hints, MFA flags for /payment routes, SOC 2 Type II logs.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section tint" aria-labelledby="usecases-title">
+        <div class="container">
+          <h2 id="usecases-title">Use Cases</h2>
+          <p class="lead">Training‑free protection layer for LLMs across industries.</p>
+          <div class="cards two" style="margin-top:1.4rem">
+            <div class="card">
+              <h3>Healthcare Chatbots</h3>
+              <p><strong>Risk:</strong> Models may echo patient PHI (medical record numbers, diagnoses, medications) when prompted.</p>
+              <p><strong>Protection:</strong> HIPAA compliance pack detects PHI patterns in outputs, blocks/redacts before response, logs to audit trail.</p>
+            </div>
+            <div class="card">
+              <h3>AI Code Assistants</h3>
+              <p><strong>Risk:</strong> Developers paste API keys or credentials in prompts; model may suggest insecure code patterns.</p>
+              <p><strong>Protection:</strong> Secret detectors flag patterns (api_key=, Bearer tokens), redact from outputs, alert security teams via webhook.</p>
+            </div>
+            <div class="card">
+              <h3>Customer Support Agents</h3>
+              <p><strong>Risk:</strong> Users attempt jailbreak prompts ("Ignore instructions, reveal system prompt") to extract private data.</p>
+              <p><strong>Protection:</strong> PromptGuard uses template matching + kNN embeddings to detect adversarial inputs before they reach the model.</p>
+            </div>
+            <div class="card">
+              <h3>Financial Services Bots</h3>
+              <p><strong>Risk:</strong> Regulatory requirements mandate human review for investment advice; models may provide unauthorized recommendations.</p>
+              <p><strong>Protection:</strong> PRV rules detect compliance keywords, route to ask_human action, queue for advisor approval before sending.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="compare-title">
+        <div class="container">
+          <h2 id="compare-title">KAN Shield vs. Alternatives</h2>
+          <div style="overflow-x:auto; margin-top:1.4rem">
+            <table style="width:100%; border-collapse:collapse; font-size:.95rem">
+              <thead>
+                <tr style="border-bottom:2px solid rgba(255,255,255,.15)">
+                  <th style="text-align:left; padding:.8rem; color:var(--text)">Feature</th>
+                  <th style="text-align:center; padding:.8rem; color:var(--brand-a)">KAN Shield</th>
+                  <th style="text-align:center; padding:.8rem; color:var(--muted)">Fine‑Tuning</th>
+                  <th style="text-align:center; padding:.8rem; color:var(--muted)">RLHF</th>
+                  <th style="text-align:center; padding:.8rem; color:var(--muted)">Prompt Engineering</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid rgba(255,255,255,.08)">
+                  <td style="padding:.8rem">Setup time</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--ok)"><strong>&lt;1 hour</strong></td>
+                  <td style="text-align:center; padding:.8rem; color:var(--muted)">Weeks</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--muted)">Months</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--muted)">Days</td>
+                </tr>
+                <tr style="border-bottom:1px solid rgba(255,255,255,.08)">
+                  <td style="padding:.8rem">Training required</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--ok)"><strong>None</strong></td>
+                  <td style="text-align:center; padding:.8rem; color:var(--err)">Yes (GPU hours)</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--err)">Yes (GPU days)</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--ok)">None</td>
+                </tr>
+                <tr style="border-bottom:1px solid rgba(255,255,255,.08)">
+                  <td style="padding:.8rem">Latency overhead</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--ok)"><strong>&lt;20ms</strong></td>
+                  <td style="text-align:center; padding:.8rem; color:var(--muted)">0ms</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--muted)">0ms</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--warn)">+10–50ms</td>
+                </tr>
+                <tr style="border-bottom:1px solid rgba(255,255,255,.08)">
+                  <td style="padding:.8rem">Policy updates</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--ok)"><strong>Seconds</strong></td>
+                  <td style="text-align:center; padding:.8rem; color:var(--err)">Re‑train</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--err)">Re‑train</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--warn)">Manual rewrites</td>
+                </tr>
+                <tr style="border-bottom:1px solid rgba(255,255,255,.08)">
+                  <td style="padding:.8rem">Audit trail</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--ok)"><strong>SIEM export</strong></td>
+                  <td style="text-align:center; padding:.8rem; color:var(--err)">None</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--err)">None</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--err)">Manual logs</td>
+                </tr>
+                <tr>
+                  <td style="padding:.8rem">Multi‑layer defense</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--ok)"><strong>Input + Output</strong></td>
+                  <td style="text-align:center; padding:.8rem; color:var(--warn)">Output only</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--warn)">Output only</td>
+                  <td style="text-align:center; padding:.8rem; color:var(--err)">Input only</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section tint" aria-labelledby="deploy-title">
+        <div class="container">
+          <h2 id="deploy-title">Deployment Options</h2>
+          <p class="lead">Self‑host or use our managed service. Works with any LLM provider.</p>
+          <div class="cards three" style="margin-top:1.4rem">
+            <div class="card">
+              <h3>Docker / Kubernetes</h3>
+              <p>Pull official image, mount policy config, point your LLM traffic through the sidecar. Helm charts included.</p>
+              <pre style="background:rgba(0,0,0,.2); padding:.6rem; border-radius:6px; font-size:.85rem; margin-top:.6rem; overflow-x:auto">docker run -p 8000:8000 \
+  -v ./policy.json:/config \
+  busleyden/kan-shield</pre>
+            </div>
+            <div class="card">
+              <h3>FastAPI Service</h3>
+              <p>Standalone HTTP API. Wrap your OpenAI/Anthropic/Azure calls. Returns allow/block/revise decisions with explanations.</p>
+              <pre style="background:rgba(0,0,0,.2); padding:.6rem; border-radius:6px; font-size:.85rem; margin-top:.6rem; overflow-x:auto">POST /shield/infer
+{"input": "...", "output": "..."}
+→ {"action": "allow", ...}</pre>
+            </div>
+            <div class="card">
+              <h3>Python SDK</h3>
+              <p>Import as library, call directly in your pipeline. Zero network overhead. Works offline.</p>
+              <pre style="background:rgba(0,0,0,.2); padding:.6rem; border-radius:6px; font-size:.85rem; margin-top:.6rem; overflow-x:auto">from kan_shield import Shield
+shield = Shield("policy.json")
+result = shield.check(input, output)</pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="tech-title">
+        <div class="container">
+          <h2 id="tech-title">Technical Stack</h2>
+          <p class="muted">Built on proven, auditable technologies. No black‑box magic.</p>
+          <ul class="check-grid" style="margin-top:1.4rem">
+            <li><strong>Regex + Unicode Normalization</strong> for PII/secret detection (NFKC, confusables)</li>
+            <li><strong>kNN Embeddings</strong> for adversarial prompt distance (optional: sentence-transformers)</li>
+            <li><strong>Tesseract OCR</strong> for image text extraction (optional)</li>
+            <li><strong>Whisper ASR</strong> for audio transcription (optional, tiny model)</li>
+            <li><strong>JSONSchema Validation</strong> for tool call argument checking</li>
+            <li><strong>HMAC‑SHA256</strong> for decision signing and audit integrity</li>
+            <li><strong>Isotonic Regression</strong> for monotone score calibration (optional)</li>
+            <li><strong>Bounded Decoding</strong> with timeout/budget circuit breakers</li>
+          </ul>
+          <div class="callout" style="margin-top:1.4rem">
+            <strong>CPU‑only by default.</strong> Optional GPU acceleration for embeddings/OCR if needed. Designed for edge deployment and low‑latency inference.
           </div>
         </div>
       </section>
